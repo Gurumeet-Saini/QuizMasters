@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\GKquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            { question: "Which is the smallest country in the world by area?", options: ["Vatican City", "Monaco", "San Marino", "Liechtenstein"], answer: "Vatican City" },
+            { question: "What is the chemical symbol for the element tungsten?", options: ["W", "Tu", "Tg", "We"], answer: "W" },
+            { question: "Which year did the United Nations officially come into existence?", options: ["1945", "1939", "1950", "1947"], answer: "1945" },
+            { question: "What is the capital city of Bhutan?", options: ["Thimphu", "Paro", "Punakha", "Trongsa"], answer: "Thimphu" },
+            { question: "Who was the first woman to win a Nobel Prize?", options: ["Marie Curie", "Rosalind Franklin", "Ada Lovelace", "Florence Nightingale"], answer: "Marie Curie" },
+            { question: "Which planet in our solar system has the most moons?", options: ["Saturn", "Jupiter", "Uranus", "Neptune"], answer: "Saturn" },
+            { question: "Which country has the most UNESCO World Heritage Sites?", options: ["Italy", "China", "India", "Spain"], answer: "Italy" },
+            { question: "Who is known as the father of geometry?", options: ["Euclid", "Pythagoras", "Archimedes", "Aristotle"], answer: "Euclid" },
+            { question: "What is the longest river in Asia?", options: ["Yangtze", "Mekong", "Yellow River", "Ganges"], answer: "Yangtze" },
+            { question: "What does 'E' stand for in the equation E=mc^2?", options: ["Energy", "Entropy", "Electricity", "Empirical"], answer: "Energy" },
+            { question: "Which Nobel Prize did Albert Einstein win in 1921?", options: ["Physics", "Chemistry", "Medicine", "Peace"], answer: "Physics" },
+            { question: "Which city is known as the 'City of Canals'?", options: ["Venice", "Amsterdam", "Stockholm", "Bangkok"], answer: "Venice" },
+            { question: "What is the national flower of Japan?", options: ["Cherry Blossom", "Lotus", "Rose", "Orchid"], answer: "Cherry Blossom" },
+            { question: "Which two elements are the most abundant in the Earth's crust?", options: ["Oxygen and Silicon", "Hydrogen and Carbon", "Iron and Aluminum", "Calcium and Potassium"], answer: "Oxygen and Silicon" },
+            { question: "What is the hardest natural substance on Earth?", options: ["Diamond", "Graphite", "Quartz", "Topaz"], answer: "Diamond" },
+            { question: "Which country does the Amazon River mainly flow through?", options: ["Brazil", "Peru", "Colombia", "Venezuela"], answer: "Brazil" },
+            { question: "Which is the largest island in the world?", options: ["Greenland", "New Guinea", "Borneo", "Madagascar"], answer: "Greenland" },
+            { question: "What is the official currency of South Korea?", options: ["Won", "Yen", "Dong", "Ringgit"], answer: "Won" },
+            { question: "Which is the largest desert in the world?", options: ["Antarctic Desert", "Sahara Desert", "Arctic Desert", "Gobi Desert"], answer: "Antarctic Desert" },
+            { question: "Which Indian state has the largest forest cover by area?", options: ["Madhya Pradesh", "Arunachal Pradesh", "Chhattisgarh", "Odisha"], answer: "Madhya Pradesh" },
+            { question: "Who was the first Indian to receive a Nobel Prize?", options: ["Rabindranath Tagore", "C.V. Raman", "Mother Teresa", "Amartya Sen"], answer: "Rabindranath Tagore" },
+            { question: "Which Indian temple is known for its chariot-shaped architecture?", options: ["Konark Sun Temple", "Brihadeeswara Temple", "Kailasa Temple", "Somnath Temple"], answer: "Konark Sun Temple" },
+            { question: "Which river is also known as 'Dakshin Ganga'?", options: ["Godavari", "Krishna", "Kaveri", "Narmada"], answer: "Godavari" },
+            { question: "In which year was the Indian Constitution adopted?", options: ["1949", "1950", "1947", "1951"], answer: "1949" },
+            { question: "Who discovered penicillin?", options: ["Alexander Fleming", "Marie Curie", "Louis Pasteur", "Joseph Lister"], answer: "Alexander Fleming" }
+            ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

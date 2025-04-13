@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <marquee behavior="alternate" direction="right" scrollamount="20" class="heading animate__animated animate__zoomIn" >WELCOME TO QUIZ MASTERS!</marquee>
+
+    <div class="Section1 animate__animated animate__zoomIn">
+        <img src="\static\images\HomeOne.jpg" alt="Home Image 1" class="HomeOne">
+        <div class="Box1">
+            <h3 class="Heading1">"Access All Quizzes - <br>Unlimited Learning Awaits!"</h3>
+            <div class="ButtonSection">
+            <a href="{{url_for('register')}}"><button type="submit" class="Button">REGISTER</button></a>
+            <a href="{{url_for('login')}}"><button type="submit" class="Button" style="width: 85px; margin-left: 20px;">LOGIN</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="Section1 animate__animated animate__zoomIn">
+        <img src="\static\images\HomeTwo.jpg" alt="Home Image 2" class="HomeOne">
+        <div class="Box1">
+            <h3 class="Heading1" style="margin-right: 65px;">"Try a Quiz for Free!"</h3>
+            <div class="ButtonSection">
+            <a href="{{url_for('DemoQuiz')}}"><button type="submit" class="Button" style="margin-right: 50px;">DEMO</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="Section1 animate__animated animate__zoomIn">
+        <img src="\static\images\HomeThree.jpg" alt="Home Image 3" class="HomeOne">
+        <div class="Box1">
+            <h3 class="Heading1" style="margin-right: 85px;">"Help Us Improve"</h3>
+            <div class="ButtonSection">
+            <a href="{{url_for('feedback')}}"><button type="submit" class="Button" style="margin-right: 50px;">FEEDBACK</button></a>
+            </div>
+        </div>
+    </div>
+    <footer class="footerbox">
+        <div class="iconposition">
+            <a name="icons"><div class="icons animate__animated animate__tada animate__repeat-2 animate__delay-1s"></a>
+            <a href="https://www.youtube.com/@QuizMastersfee" target="_blank" style="color: white;" class="icon"><i class="fa fa-brands fa-youtube"></i></a>
+            <a href="" target="_blank" class="icon"><i class="fa fa-brands fa-instagram" style="color: white;"></i></a>
+            <a href="tel:7814926760" class="icon"><i class="fa fa-solid fa-phone" style="color: white;"></i></a>
+            <a href="mailto:quizmasters.fee@gmail.com" class="icon"><i class="fa fa-regular fa-envelope" style="color: white;"></i></a></div>
+        </div><br>
+        <div class="textposition animate__animated animate__tada animate__repeat-2 animate__delay-1s">
+            <div class="footertext2">&copy;2025 Quiz Masters</div>
+        </div>
+    </footer>
+</body>
+</html>

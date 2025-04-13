@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\StoryHome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>QUIZ MASTERS</title>
+</head>
+<body>
+    <h1 class="Heading animate__animated animate__bounceIn">THE ART OF STORYTELLING</h1>
+    <div class="Section">
+        <div class="Box animate__animated animate__bounceIn">
+            <h1 class="SubHeading">WHAT TO DO</h1>
+            <h4 class="Content">• Be original - write your own stories, from your imagination or real experiences.</h4>
+            <h4 class="Content">• Be creative - use your words to build exciting, funny, emotional, or inspiring stories.</h4>
+            <h4 class="Content">• Be respectful - write stories that are kind and welcoming to all readers.</h4>
+            <h4 class="Content">• Check spelling and grammar - it helps everyone understand your story better.</h4>
+        </div>
+        <div class="Box animate__animated animate__bounceIn" style="margin-left: 30px;">
+            <h1 class="SubHeading">WHAT NOT TO DO</h1>
+            <h4 class="Content">• No hate speech - avoid language that disrespects or hurts others.</h4>
+            <h4 class="Content">• No bullying, threats, or violence - stories should create a safe space.</h4>
+            <h4 class="Content">• No inappropriate or adult content - keep your story suitable for all age groups.</h4>
+            <h4 class="Content">• No copying others' work - write your own story, don't copy-paste from websites or books.</h4>
+        </div>
+        <a href="{{url_for('WriteStory')}}"><button type="submit" class="Button animate__animated animate__bounceIn">GET STARTED</button></a>
+        <a href="{{url_for('dashboard')}}"><button type="submit" class="Button animate__animated animate__bounceIn" style="width: 90px;">BACK</button></a>
+    </div>
+    <h2 class="Heading animate__animated animate__bounceIn">SAVED STORIES</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for story in stories %}
+        <div class="CardBox animate__animated animate__bounceIn" style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; width: 250px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+        <p class="CardContent"><strong class="CardHeading">User:</strong> {{ story.name }}</p>
+        <p class="CardContent"><strong class="CardHeading">Title:</strong> {{ story.title }}</p>
+        <a href="{{ url_for('ViewStory', story_id=story.id) }}">
+            <button class="ViewButton">VIEW STORY</button>
+        </a>
+        </div>
+    {% else %}
+        <p class="CardContent" style="font-size: 30px;">No stories yet.</p>
+    {% endfor %}
+</div>
+</body>
+</html>

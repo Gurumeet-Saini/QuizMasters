@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Sciencequestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+        { question: "Which of the following is a gas that contributes to the greenhouse effect?", options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Helium"], answer: "Carbon Dioxide" },
+        { question: "Which organ in the human body produces insulin?", options: ["Liver", "Stomach", "Pancreas", "Kidneys"], answer: "Pancreas" },
+        { question: "What is the main ingredient in glass?", options: ["Silica", "Calcium", "Magnesium", "Sodium"], answer: "Silica" },
+        { question: "What is the largest organ inside the human body?", options: ["Brain", "Lungs", "Liver", "Heart"], answer: "Liver" },
+        { question: "What is the primary source of energy for the Earth?", options: ["The Moon", "The Sun", "The Earth’s core", "The Wind"], answer: "The Sun" },
+        { question: "What is the boiling point of water in Fahrenheit?", options: ["212°F", "100°F", "50°F", "32°F"], answer: "212°F" },
+        { question: "Which animal is known to have the longest lifespan?", options: ["Elephant", "Blue Whale", "Tortoise", "Human"], answer: "Tortoise" },
+        { question: "Which gas is produced as a waste product during cellular respiration?", options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], answer: "Carbon Dioxide" },
+        { question: "What is the chemical symbol for potassium?", options: ["K", "P", "Na", "Cl"], answer: "K" },
+        { question: "Which of the following elements is a noble gas?", options: ["Neon", "Oxygen", "Nitrogen", "Helium"], answer: "Neon" },
+        { question: "What is the process by which plants make their own food?", options: ["Photosynthesis", "Respiration", "Fermentation", "Digestion"], answer: "Photosynthesis" },
+        { question: "What kind of bond is formed when electrons are shared between atoms?", options: ["Ionic bond", "Covalent bond", "Hydrogen bond", "Metallic bond"], answer: "Covalent bond" },
+        { question: "Which of these is a primary producer in an ecosystem?", options: ["Lion", "Deer", "Sunflower", "Wolf"], answer: "Sunflower" },
+        { question: "What is the most abundant element in the Earth's crust?", options: ["Iron", "Oxygen", "Silicon", "Aluminum"], answer: "Oxygen" },
+        { question: "Which process is responsible for the formation of clouds?", options: ["Evaporation", "Condensation", "Precipitation", "Transpiration"], answer: "Condensation" },
+        { question: "Which of the following is an example of a physical change?", options: ["Burning wood", "Rusting iron", "Melting ice", "Digestion of food"], answer: "Melting ice" },
+        { question: "What is the term for the amount of matter in an object?", options: ["Weight", "Density", "Mass", "Volume"], answer: "Mass" },
+        { question: "Which part of the human brain is responsible for memory and learning?", options: ["Cerebrum", "Cerebellum", "Medulla", "Hippocampus"], answer: "Hippocampus" },
+        { question: "What is the most common type of rock found on Earth?", options: ["Sedimentary", "Metamorphic", "Igneous", "Volcanic"], answer: "Igneous" },
+        { question: "Which part of the plant is primarily responsible for photosynthesis?", options: ["Roots", "Stem", "Flowers", "Leaves"], answer: "Leaves" },
+        { question: "What is the main function of white blood cells?", options: ["Transport oxygen", "Fight infections", "Carry nutrients", "Produce insulin"], answer: "Fight infections" },
+        { question: "Which element is known as the 'building block of life'?", options: ["Carbon", "Hydrogen", "Oxygen", "Nitrogen"], answer: "Carbon" },
+        { question: "Which part of the eye controls the amount of light that enters?", options: ["Lens", "Pupil", "Cornea", "Retina"], answer: "Pupil" },
+        { question: "What is the only planet that rotates on its side?", options: ["Earth", "Uranus", "Mars", "Saturn"], answer: "Uranus" },
+        { question: "Which of the following is a nonrenewable resource?", options: ["Solar energy", "Wind energy", "Coal", "Geothermal energy"], answer: "Coal" },
+        { question: "Which of these scientists is known for developing the theory of evolution?", options: ["Isaac Newton", "Charles Darwin", "Albert Einstein", "Galileo Galilei"], answer: "Charles Darwin" }
+        ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

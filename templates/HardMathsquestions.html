@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Mathsquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+        { question: "What is the value of log2 1024?", options: ["5", "8", "10", "12"], answer: "10" },
+        { question: "What is the derivative of sin(x)?", options: ["cos(x)", "-cos(x)", "sin(x)", "-sin(x)"], answer: "cos(x)" },
+        { question: "Which of the following is the integral of 1/x?", options: ["ln(x)", "ln(x) + C", "x^2", "x"], answer: "ln(x) + C" },
+        { question: "What is the sum of the first 100 prime numbers?", options: ["1060", "1061", "1051", "1070"], answer: "1061" },
+        { question: "Which of the following is not a solution to the equation x^2 - 4 = 0?", options: ["2", "4", "-2", "-4"], answer: "4" },
+        { question: "What is the derivative of e^x?", options: ["e^x", "x", "e", "x^2"], answer: "e^x" },
+        { question: "What is the value of pi to four decimal places?", options: ["3.1415", "3.1417", "3.1420", "3.1409"], answer: "3.1415" },
+        { question: "Which of the following is a valid matrix operation?", options: ["Matrix addition", "Matrix subtraction", "Matrix multiplication", "All of the above"], answer: "All of the above" },
+        { question: "What is the solution to the equation 3x + 4 = 19?", options: ["x = 5", "x = 3", "x = 2", "x = 6"], answer: "x = 5" },
+        { question: "The angle of elevation of a building is 30°. What is the height of the building if the distance from the base is 20 meters?", options: ["10", "15", "20", "30"], answer: "10" },
+        { question: "Which of the following represents the quadratic equation?", options: ["ax^2 + bx + c = 0", "ax^3 + bx + c = 0", "ax^2 + b + c = 0", "ax^2 + bx = 0"], answer: "ax^2 + bx + c = 0" },
+        { question: "What is the formula for the area of a circle?", options: ["πr^2", "2πr", "πd", "πr"], answer: "πr^2" },
+        { question: "What is the sum of the first 10 terms of the arithmetic sequence 2, 5, 8, 11, ...?", options: ["50", "55", "60", "65"], answer: "55" },
+        { question: "What is the integral of x^2?", options: ["x^3", "x^3 + C", "2x", "x^3/3"], answer: "x^3/3" },
+        { question: "What is the determinant of a 2x2 matrix [a, b; c, d]?", options: ["ad - bc", "ab - cd", "ad + bc", "ac + bd"], answer: "ad - bc" },
+        { question: "What is the solution to the equation 2x + 3 = 7?", options: ["x = 2", "x = 1", "x = 3", "x = 5"], answer: "x = 2" },
+        { question: "What is the value of the angle sum of a triangle?", options: ["90°", "180°", "360°", "270°"], answer: "180°" },
+        { question: "What is the solution to the equation 5x - 2 = 3?", options: ["x = 1", "x = 2", "x = 0.5", "x = 3"], answer: "x = 1" },
+        { question: "What is the second derivative of x^3?", options: ["3x^2", "6x", "3x", "9x^2"], answer: "6x" },
+        { question: "What is the limit of sin(x)/x as x approaches 0?", options: ["1", "0", "-1", "undefined"], answer: "1" },
+        { question: "What is the sum of the internal angles of a pentagon?", options: ["540°", "360°", "180°", "720°"], answer: "540°" },
+        { question: "What is the value of 2^5?", options: ["32", "64", "16", "128"], answer: "32" },
+        { question: "Which of the following is a prime number?", options: ["9", "15", "17", "21"], answer: "17" },
+        { question: "What is the volume of a sphere with radius 3?", options: ["36π", "27π", "81π", "72π"], answer: "36π" },
+        { question: "What is the difference between 3^4 and 4^3?", options: ["1", "7", "25", "35"], answer: "25" },
+        { question: "What is the cosine of 60°?", options: ["0.5", "1", "0.866", "0"], answer: "0.5" },
+        { question: "What is the inverse of tan(x)?", options: ["arcsin(x)", "arccos(x)", "arctan(x)", "sin(x)"], answer: "arctan(x)" }
+        ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

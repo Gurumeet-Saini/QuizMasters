@@ -1,0 +1,153 @@
+body{
+    background-image: url(images/SCIENCEQUIZPAGE.png);
+    background-size: 100%;
+    background-attachment: fixed;
+}
+.quizsection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 96vh;
+}
+.topsection{
+    display: flex;
+    flex-direction: row;
+}
+.quizbox{
+    height: 350px;
+    width: 250px;
+    background-image: url(images/SCIENCEQUIZBOX.png);
+    background-size: 135%;
+    border-radius: 40px 40px 40px 40px;
+    margin: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.headingbox3{
+    height: 50px;
+    width: 140px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: rgb(202, 78, 255);
+    box-shadow: 0 0 7px 7px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 225px;
+}
+.headingbox2{
+    height: 50px;
+    width: 160px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 7px 7px rgb(24, 22, 22);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 225px;
+}
+.headingbox1{
+    height: 50px;
+    width: 140px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: rgb(255, 158, 89);
+    box-shadow: 0 0 7px 7px rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 225px;
+}
+.heading1{
+    font-family: showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1.10px;
+    font-size: 30px;
+}
+.heading2{
+    font-family: showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(24,22,22);
+    -webkit-text-stroke-width: 1.10px;
+    font-size: 30px;
+}
+.heading3{
+    font-family: showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+    -webkit-text-stroke-width: 1.10px;
+    font-size: 30px;
+}
+.play3{
+    font-family: "Carter One", serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33px;
+    width: 110px;
+    color: white;
+    background-color: rgb(202, 78, 255);
+    border: 5px solid white;
+    border-radius: 20px 20px 20px 20px;
+}
+.play3:hover{
+    cursor: pointer;
+    background-color: rgb(202, 78, 255);
+    box-shadow: 0 0 5px 5px rgb(202, 78, 255),
+        0 0 20px 5px rgb(202, 78, 255),
+        0 0 60px 5px rgb(202, 78, 255),
+        0 0 150px 5px rgb(202, 78, 255)
+}
+.play2{
+    font-family: "Carter One", serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33px;
+    width: 110px;
+    color: black;
+    background-color: rgb(255, 255, 255);
+    border: 5px solid black;
+    border-radius: 20px 20px 20px 20px;
+}
+.play2:hover{
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 5px 5px rgb(255, 255, 255),
+        0 0 20px 5px rgb(255, 255, 255),
+        0 0 60px 5px rgb(255, 255, 255),
+        0 0 150px 5px rgb(255, 255, 255)
+}
+.play1{
+    font-family: "Carter One", serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33px;
+    width: 110px;
+    color: white;
+    background-color: rgb(255, 158, 89);
+    border: 5px solid white;
+    border-radius: 20px 20px 20px 20px;
+}
+.play1:hover{
+    cursor: pointer;
+    background-color: rgb(255, 158, 89);
+    box-shadow: 0 0 5px 5px rgb(255, 158, 89),
+        0 0 20px 5px rgb(255, 158, 89),
+        0 0 60px 5px rgb(255, 158, 89),
+        0 0 150px 5px rgb(255, 158, 89)
+}
+.link{
+    text-decoration: none;
+}
+.backsection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

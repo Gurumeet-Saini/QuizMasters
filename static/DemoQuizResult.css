@@ -1,0 +1,159 @@
+body{
+    background-image: url(images/CreateAndLoginPage.png);
+    background-size: 110%;
+    background-attachment: fixed;
+}
+.quizsection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 96vh;
+}
+.topsection{
+    display: flex;
+    flex-direction: row;
+}
+.quizbox{
+    height: 700px;
+    width: 700px;
+    background-image: url(images/QUIZBOX.png);
+    background-size: 100%;
+    border-radius: 40px 40px 40px 40px;
+    margin: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.headingbox1{
+    height: 70px;
+    width: 200px;
+    border-radius: 20px 20px 20px 20px;
+    background-color: rgb(249, 192, 36);
+    box-shadow: 0 0 7px 7px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+}
+#resultbox1, #resultbox2{
+    height: 80px;
+    width: 170px;
+    font-size: 23px;
+    font-weight: bolder;
+    background-color: rgb(255, 203, 119);
+    text-align: center;
+    box-shadow: 0 0 5px 5px black;
+    border-radius: 20px 20px 20px 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 0;
+    position: relative;
+    bottom: 112px;
+    right: 215px;
+}
+.play1{
+    height: 40px;
+    width: 120px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 179, 255);
+    border: 5px solid rgb(0, 0, 0);
+    border-radius: 20px 20px 20px 20px;
+    position: relative;
+    bottom: 90px;
+    right: 215px;
+}
+.play1:hover{
+    cursor: pointer;
+    background-color: rgb(0, 179, 255);
+    box-shadow: 0 0 5px 5px rgb(0, 179, 255),
+        0 0 20px 5px rgb(0, 179, 255),
+        0 0 60px 5px rgb(0, 179, 255),
+        0 0 150px 5px rgb(0, 179, 255)
+}
+.play2{
+    height: 40px;
+    width: 120px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: black;
+    background-color: rgb(255, 203, 119);
+    border: 5px solid black;
+    border-radius: 20px 20px 20px 20px;
+    margin-top: 30px;
+    position: relative;
+    bottom: 110px;
+    right: 215px;
+}
+.play2:hover{
+    cursor: pointer;
+    background-color: rgb(255, 203, 119);
+    box-shadow: 0 0 5px 5px rgb(255, 203, 119),
+        0 0 20px 5px rgb(255, 203, 119),
+        0 0 60px 5px rgb(255, 203, 119),
+        0 0 150px 5px rgb(255, 203, 119)
+}
+.Section1{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-self: center;
+    margin-top: 60px;
+}
+.HomeOne{
+    height: 350px;
+    width: 280px;
+    box-shadow: 0 0 7px 7px white;
+    border-radius: 50px 50px 50px 50px;
+    display: flex;
+    position: absolute;
+}
+.Box1{
+    height: 350px;
+    width: 700px;
+    background-color: rgba(0, 34, 255, 0.7);
+    box-shadow: 0 0 7px 7px white;
+    border-radius: 50px 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+.Heading1{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    margin-right: 15px;
+}
+.ButtonSection{
+    display: flex;
+    flex-direction: row;
+    margin-right: 100px;
+}
+.Button{
+    height: 30px;
+    width: 120px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 22px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgb(255, 217, 0);
+    border: 1px solid white;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 5px 5px white;
+    transition: all 0.3s ease;
+}
+.Button:hover{
+    transform: scale(1.2);
+}

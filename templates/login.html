@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='register.js') }}"></script>
+    <script type="text/javascript" src="\static\login.js"></script>
+    <title>QUIZ MASTERS</title>
+</head>
+<body>
+    <marquee behavior="alternate" direction="right" scrollamount="20" class="heading animate__animated animate__zoomIn" >WELCOME BACK TO QUIZ MASTERS!</marquee>
+    <div class="boxsection">
+        <img src="\static\images\Character.png" alt="character" id="character" class="animate__animated animate__zoomIn">
+        <div class="Loginbox animate__animated animate__zoomIn">
+            <form class="Loginsection" id="loginform" method="POST">
+                <h2 class="text1">LOGIN ACCOUNT</h2>
+                <h2 class="text2"><b>DON'T HAVE AN ACCOUNT? <a href="{{url_for('register')}}">CREATE IT</a></b></h2>
+                <input type="text" class="form" placeholder="EMAIL" name="email" style="margin-top: 10px;" id="n1" required>
+                <input type="password" class="form" placeholder="PASSWORD" name="password" id="n2" required>
+                <button type="submit" class="submitbutton">LOGIN</button>
+                <a href="{{url_for('home')}}"><button type="button" class="backbutton">HOME</button></a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

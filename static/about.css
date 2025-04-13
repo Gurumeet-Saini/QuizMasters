@@ -1,0 +1,233 @@
+html,
+body {
+    background-image: url(images/MainPageGuru.png);
+    background-size: 100%;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.knowledge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+}
+
+.MainKnowledgeBox {
+    height: 100px;
+    width: 200px;
+    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.knowledgetext{
+    font-size: 30px;
+    font-family: Showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(253, 43, 78);
+    -webkit-text-stroke-width: 1.10px;
+    margin: 2px;
+}
+
+.knowledgebox {
+    height: 120px;
+    width: 170px;
+    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.funfact{
+    height: 90px;
+    width: 110px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78);
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+}
+
+.headingbox {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    height: 100px;
+    width: 600px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    height: 80px;
+    width: 80px;
+    border: 3px solid white;
+    border-radius: 10px 10px 10px 10px;
+    margin: 20px;
+}
+
+#mainheading {
+    font-family: Showcard Gothic;
+    font-size: 50px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1.10px;
+}
+
+.navigationbar {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    height: 100px;
+    width: 770px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 70px;
+}
+
+.navtext1 {
+    font-size: 27px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+    margin: 10px;
+}
+
+.navlinking:hover{
+    color: black;
+}
+
+.navtext4 {
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+    margin: 0px;
+    position: relative;
+    bottom: 20px;
+}
+
+.navlinking {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+#accountimage {
+    height: 100px;
+    width: 100px;
+}
+
+.textdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.contentbox{
+    height: 1470px;
+    width: 1100px;
+    background-image: linear-gradient(rgb(255, 255, 255),rgb(179, 242, 245));
+    border-radius: 50px 50px 50px 50px;
+    box-shadow: 0 0 5px 5px rgb(0, 162, 255);
+    margin-left: 110px;
+}
+
+.subheading {
+    margin-top: 60px;
+}
+
+.subheadingbox {
+    background-color: white;
+    height: 70px;
+    width: 350px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px rgb(0, 162, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(0, 162, 255);
+    -webkit-text-stroke-width: 1.10px;
+    margin-left: 30px;
+}
+
+.text{
+    font-size: 24px;
+    font-family: 'Times New Roman';
+    color: rgb(0, 162, 255);
+    text-align: justify;
+    margin: 30px;
+}
+
+.footerbox {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    padding: 100px;
+    height: 100px;
+    margin-top: 60px;
+    box-shadow: 0 0 10px 10px white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons {
+    font-size: 50px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1.50px;
+}
+
+.textposition {
+    display: flex;
+    flex-direction: row;
+}
+
+.footertext1 {
+    font-size: 27px;
+    color: white;
+    margin: 20px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+}
+
+.footertext2 {
+    font-size: 27px;
+    color: white;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+}

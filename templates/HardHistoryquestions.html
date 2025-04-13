@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Historyquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+        { question: "Who was the last ruler of the Nanda dynasty?", options: ["Mahapadma Nanda", "Dhanananda", "Chandragupta Maurya", "Ashoka"], answer: "Dhanananda" },
+        { question: "Which empire is credited with the first extensive use of the Gupta script?", options: ["Gupta Empire", "Maurya Empire", "Chola Empire", "Mughal Empire"], answer: "Gupta Empire" },
+        { question: "Which dynasty is associated with the construction of the Brihadeeswarar Temple in Tamil Nadu?", options: ["Chola Dynasty", "Pandya Dynasty", "Vijayanagar Empire", "Maurya Dynasty"], answer: "Chola Dynasty" },
+        { question: "Which Indian ruler was known as the 'Napoleon of India'?", options: ["Samudragupta", "Ashoka", "Shivaji Maharaj", "Raja Raja Chola"], answer: "Samudragupta" },
+        { question: "In which year was the Battle of Plassey fought?", options: ["1757", "1761", "1782", "1803"], answer: "1757" },
+        { question: "Which famous Indian leader called for 'Do or Die' during the Quit India Movement?", options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Patel", "Subhas Chandra Bose"], answer: "Mahatma Gandhi" },
+        { question: "Which is the first battle where the Marathas faced a significant defeat?", options: ["Battle of Panipat", "Battle of Buxar", "Battle of Haldighati", "Battle of Plassey"], answer: "Battle of Panipat" },
+        { question: "Which ancient Indian text is known as one of the earliest works of the Indian civilization?", options: ["Rigveda", "Mahabharata", "Ramayana", "Upanishads"], answer: "Rigveda" },
+        { question: "Who led the Swaraj movement during the Indian independence struggle?", options: ["Lala Lajpat Rai", "Subhas Chandra Bose", "Bal Gangadhar Tilak", "Bipin Chandra Pal"], answer: "Bal Gangadhar Tilak" },
+        { question: "The Chola Empire primarily flourished during which century?", options: ["10th-13th century", "7th-8th century", "5th-6th century", "14th-16th century"], answer: "10th-13th century" },
+        { question: "Which of these Indian rulers is credited with establishing the first centralized administration in India?", options: ["Chandragupta Maurya", "Ashoka", "Raja Raja Chola", "Harsha"], answer: "Chandragupta Maurya" },
+        { question: "Who was the founder of the Vijayanagara Empire?", options: ["Krishnadevaraya", "Harihara I", "Raja Raja Chola", "Chandragupta Maurya"], answer: "Harihara I" },
+        { question: "Which Indian ruler is credited with spreading Buddhism to Sri Lanka?", options: ["Ashoka", "Chandragupta Maurya", "Harsha", "Samudragupta"], answer: "Ashoka" },
+        { question: "The Battle of Buxar was fought in which year?", options: ["1764", "1757", "1803", "1799"], answer: "1764" },
+        { question: "Who was the last ruler of the Maurya dynasty?", options: ["Ashoka", "Chandragupta Maurya", "Bimbisara", "Brihadratha"], answer: "Brihadratha" },
+        { question: "Which Indian king is known for his administration reforms and public works during the Gupta period?", options: ["Chandragupta I", "Samudragupta", "Chandragupta II", "Kumaragupta"], answer: "Chandragupta II" },
+        { question: "Which Indian empire was known for its extensive maritime trade network in Southeast Asia?", options: ["Chola Empire", "Maurya Empire", "Gupta Empire", "Vijayanagar Empire"], answer: "Chola Empire" },
+        { question: "Which ancient Indian city is believed to be the center of the Indus Valley Civilization?", options: ["Harappa", "Ayodhya", "Pataliputra", "Ujjain"], answer: "Harappa" },
+        { question: "Which Indian emperor's reign marked the height of the Maurya Empire?", options: ["Chandragupta Maurya", "Bindusara", "Ashoka", "Samudragupta"], answer: "Ashoka" },
+        { question: "Which ruler is known for the establishment of the Vijayanagar Empire?", options: ["Harihara I", "Krishnadevaraya", "Raja Raja Chola", "Gajapati"], answer: "Harihara I" },
+        { question: "In which year was the First Battle of Panipat fought?", options: ["1526", "1556", "1761", "1857"], answer: "1526" },
+        { question: "The Chola naval expeditions in Southeast Asia were aimed at which of the following?", options: ["Trade and conquest", "Religious conversion", "Diplomatic alliances", "Military defence"], answer: "Trade and conquest" },
+        { question: "Who was the last ruler of the Vijayanagara Empire?", options: ["Krishnadevaraya", "Saluva Narasimha", "Rama Raya", "Venkata II"], answer: "Rama Raya" },
+        { question: "Which Indian king is credited with defeating Alexander the Great's forces at the Battle of the Hydaspes?", options: ["Porus", "Chandragupta Maurya", "Samudragupta", "Bimbisara"], answer: "Porus" },
+        { question: "In which battle did the Marathas defeat the Mughals and achieve a significant victory?", options: ["Battle of Panipat", "Battle of Buxar", "Battle of Khajwa", "Battle of Plassey"], answer: "Battle of Khajwa" }
+          ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Historyquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+        { question: "Who was the first ruler of the Gupta Empire?", options: ["Chandragupta I", "Ashoka", "Samudragupta", "Chandragupta Maurya"], answer: "Chandragupta I" },
+        { question: "Which Indian king is known for his contributions to the art and architecture of India?", options: ["Raja Raja Chola", "Harsha", "Samudragupta", "Akbar"], answer: "Raja Raja Chola" },
+        { question: "Which ancient Indian university was established during the Gupta period?", options: ["Nalanda", "Takshashila", "Vikramshila", "Pushpagiri"], answer: "Nalanda" },
+        { question: "What was the name of the treaty signed between India and Pakistan in 1960 for sharing the waters of the Indus River?", options: ["Simla Agreement", "Indus Waters Treaty", "Lahore Declaration", "Tashkent Agreement"], answer: "Indus Waters Treaty" },
+        { question: "Which is the largest and most influential kingdom of ancient India?", options: ["Maurya Empire", "Gupta Empire", "Magadha Kingdom", "Vijayanagar Empire"], answer: "Maurya Empire" },
+        { question: "Which battle did the Marathas win in 1761 but at a heavy cost?", options: ["Battle of Plassey", "Battle of Panipat", "Battle of Haldighati", "Battle of Buxar"], answer: "Battle of Panipat" },
+        { question: "Which Indian king was responsible for the establishment of the famous Mauryan dynasty?", options: ["Ashoka", "Chandragupta Maurya", "Bindusara", "Bimbisara"], answer: "Chandragupta Maurya" },
+        { question: "Which of these leaders was involved in the formation of the 'Forward Bloc' in the 1930s?", options: ["Subhas Chandra Bose", "Mahatma Gandhi", "Jawaharlal Nehru", "Lala Lajpat Rai"], answer: "Subhas Chandra Bose" },
+        { question: "Who was the first governor-general of independent India?", options: ["Lord Mountbatten", "Rajendra Prasad", "C. Rajagopalachari", "Jawaharlal Nehru"], answer: "C. Rajagopalachari" },
+        { question: "Which battle marked the beginning of the decline of the Maratha Empire?", options: ["Battle of Panipat", "Battle of Plassey", "Battle of Haldighati", "Battle of Buxar"], answer: "Battle of Panipat" },
+        { question: "Which famous Indian leader was known as the 'Iron Man of India'?", options: ["Sardar Vallabhbhai Patel", "Jawaharlal Nehru", "Bhagat Singh", "Subhas Chandra Bose"], answer: "Sardar Vallabhbhai Patel" },
+        { question: "Which was the first modern Indian state to have a legislative assembly?", options: ["Bombay", "Calcutta", "Madras", "Punjab"], answer: "Madras" },
+        { question: "In which year was the Indian National Congress founded?", options: ["1885", "1895", "1905", "1915"], answer: "1885" },
+        { question: "Which king ruled the Vijayanagar Empire at its peak?", options: ["Krishnadevaraya", "Raja Raja Chola", "Harsha", "Gopala"], answer: "Krishnadevaraya" },
+        { question: "Who was the first woman ruler of India?", options: ["Rani Durgavati", "Indira Gandhi", "Rani Lakshmibai", "Begum Hazrat Mahal"], answer: "Rani Durgavati" },
+        { question: "In which year was the 'Minto-Morley Reforms' passed?", options: ["1909", "1919", "1929", "1947"], answer: "1909" },
+        { question: "Who led the first successful rebellion against British rule in India in 1857?", options: ["Mangal Pandey", "Rani Lakshmibai", "Bahadur Shah Zafar", "Tatya Tope"], answer: "Mangal Pandey" },
+        { question: "Which Indian nationalist leader founded the Home Rule Movement?", options: ["Bal Gangadhar Tilak", "Lala Lajpat Rai", "Subhas Chandra Bose", "Mahatma Gandhi"], answer: "Bal Gangadhar Tilak" },
+        { question: "Which was the first major battle fought between the Marathas and the Mughals?", options: ["Battle of Panipat", "Battle of Haldighati", "Battle of Buxar", "Battle of Plassey"], answer: "Battle of Panipat" },
+        { question: "Which famous Indian leader was known as the 'Lion of Punjab'?", options: ["Lala Lajpat Rai", "Bhagat Singh", "Shaheed Udham Singh", "Raja Ranjit Singh"], answer: "Lala Lajpat Rai" },
+        { question: "What was the primary cause of the Sepoy Mutiny of 1857?", options: ["Religious Discontent", "British Policies", "Economic Factors", "All of the above"], answer: "All of the above" },
+        { question: "Who was the first to introduce the 'Doctrine of Lapse' in India?", options: ["Lord Dalhousie", "Lord Mountbatten", "Lord Curzon", "Lord Canning"], answer: "Lord Dalhousie" },
+        { question: "Who was the founder of the Sikh Empire in the early 19th century?", options: ["Ranjit Singh", "Banda Singh Bahadur", "Guru Gobind Singh", "Hari Singh Nalwa"], answer: "Ranjit Singh" },
+        { question: "Which dynasty ruled over the Deccan region during the 16th century?", options: ["Bahmani Sultanate", "Mughal Empire", "Vijayanagar Empire", "Chola Dynasty"], answer: "Vijayanagar Empire" },
+        { question: "Which river was associated with the Indus Valley Civilization?", options: ["Indus", "Ganges", "Yamuna", "Narmada"], answer: "Indus" }
+        ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Geographyquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+          { question: "Which one of the following type of resource is iron ore?", options: ["Renewable", "Biotic", "Flow", "Non-renewable"], answer: "Non-renewable" },
+          { question: "Which one of the following is a renewable resource?", options: ["Coal", "Petroleum", "Solar energy", "Fossil fuels"], answer: "Solar energy" },
+          { question: "Which of the following resource is non-recyclable?", options: ["Coal", "Iron-ore", "Copper", "Gold"], answer: "Coal" },
+          { question: "Black soil is also called:", options: ["Bangar", "Khadar", "Regur", "Humus"], answer: "Regur" },
+          { question: "_______________ has the largest area under permanent forests, constituting 75 per cent of its total forest area.", options: ["Orissa", "Madhya Pradesh", "Chhattisgarh", "Assam"], answer: "Madhya Pradesh" },
+          { question: "_______________ are the species which are in danger of extinction.", options: ["Endangered species", "Rare species", "Extinct species", "Endemic species"], answer: "Endangered species" },
+          { question: "Hirakud Dam is constructed on the river:", options: ["Ganga", "Manjira", "Manas", "Mahanadi"], answer: "Mahanadi" },
+          { question: "Operation Flood is associated with _______________", options: ["Green Revolution", "White Revolution", "Black Revolution", "Pink Revolution"], answer: "White Revolution" },
+          { question: "Which of the following types of vegetation does rubber belong to?", options: ["Tundra", "Himalayan", "Tidal", "Tropical Evergreen"], answer: "Tropical Evergreen" },
+          { question: "Which one of the following bio-reserves of India is not included in the world network of bio reserves?", options: ["Manas", "Gulf of Mannar", "Nilgiri", "Nanda Devi"], answer: "Manas" },
+          { question: "What is the longest river in the world?", options: ["Amazon", "Nile", "Yangtze", "Mississippi"], answer: "Nile" },
+          { question: "Which country has the largest area of tropical rainforest?", options: ["Brazil", "Australia", "India", "Indonesia"], answer: "Brazil" },
+          { question: "Which of the following is a landlocked country?", options: ["Germany", "India", "Nepal", "France"], answer: "Nepal" },
+          { question: "Which country is known as the Land of the Rising Sun?", options: ["China", "Japan", "South Korea", "Vietnam"], answer: "Japan" },
+          { question: "What is the capital city of Canada?", options: ["Ottawa", "Toronto", "Vancouver", "Montreal"], answer: "Ottawa" },
+          { question: "Which river is the longest in India?", options: ["Ganges", "Yamuna", "Brahmaputra", "Godavari"], answer: "Ganges" },
+          { question: "What is the highest peak in India?", options: ["Kangchenjunga", "Mount Everest", "Nanda Devi", "Annapurna"], answer: "Kangchenjunga" },
+          { question: "Which state in India is the largest producer of tea?", options: ["West Bengal", "Assam", "Kerala", "Tamil Nadu"], answer: "Assam" },
+          { question: "The Thar Desert is located in which part of India?", options: ["North", "East", "West", "South"], answer: "West" },
+          { question: "Which of the following cities is known as the 'City of Lakes' in India?", options: ["Udaipur", "Bhopal", "Chennai", "Hyderabad"], answer: "Udaipur" },  
+          { question: "Which country is bordered by both the Atlantic and Pacific Oceans?", options: ["Colombia", "USA", "Mexico", "Brazil"], answer: "USA" },
+          { question: "The Great Barrier Reef is located in which country?", options: ["Australia", "USA", "New Zealand", "India"], answer: "Australia" },
+          { question: "Which continent has the highest number of countries?", options: ["Africa", "Asia", "Europe", "North America"], answer: "Africa" },
+          { question: "Which of the following countries is known for having the Sahara Desert?", options: ["Algeria", "Egypt", "Sudan", "Morocco"], answer: "Algeria" },
+          { question: "The Great Wall of China was built to protect China from which group?", options: ["Mongols", "Romans", "Japanese", "Huns"], answer: "Mongols" }
+          ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\GuessTheFlagQuiz.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/India.png" alt="India Flag" width="100">',
+                options: ['India', 'Brazil', 'Germany', 'Australia'],
+                answer: 'India'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/USA.png" alt="USA Flag" width="100">',
+                options: ['Canada', 'USA', 'UK', 'Mexico'],
+                answer: 'USA'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/Japan.png" alt="Japan Flag" width="100">',
+                options: ['China', 'South Korea', 'Japan', 'Thailand'],
+                answer: 'Japan'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/Germany.png" alt="Germany Flag" width="100">',
+                options: ['Belgium', 'Germany', 'Austria', 'Netherlands'],
+                answer: 'Germany'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/France.png" alt="France Flag" width="100">',
+                options: ['Italy', 'France', 'Russia', 'Croatia'],
+                answer: 'France'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/Brazil.png" alt="Brazil Flag" width="100">',
+                options: ['Argentina', 'Mexico', 'Portugal', 'Brazil'],
+                answer: 'Brazil'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/Australia.jpg" alt="Australia Flag" width="100">',
+                options: ['UK', 'New Zealand', 'Australia', 'South Africa'],
+                answer: 'Australia'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/Canada.png" alt="Canada Flag" width="100">',
+                options: ['USA', 'Canada', 'Denmark', 'Austria'],
+                answer: 'Canada'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/Russia.png" alt="Russia Flag" width="100">',
+                options: ['Serbia', 'Russia', 'Slovakia', 'Czech Republic'],
+                answer: 'Russia'
+            },
+            {
+                question: 'Guess the Flag: <br><img src="/static/images/flags/SouthKorea.png" alt="South Korea Flag" width="100">',
+                options: ['South Korea', 'Japan', 'China', 'Vietnam'],
+                answer: 'South Korea'
+            }
+            ];
+
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+
+            const questionBox = document.getElementById("question");
+            questionBox.innerHTML = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

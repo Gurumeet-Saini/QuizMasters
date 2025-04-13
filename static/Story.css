@@ -1,0 +1,106 @@
+body{
+    background-image: url(images/StoryPage.png);
+    background-size: 100%;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0px;
+}
+.Heading{
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    -webkit-text-stroke-width: 2.3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    border: 4px solid rgb(0, 0, 0);
+    border-radius: 7px 7px 7px 7px;
+    padding: 7px;
+}
+.Section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.Box{
+    height: 680px;
+    width: 750px;
+    border: 5px solid rgb(0, 0, 0);
+    background-color: rgba(0, 0, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.SubHeading{
+    color: rgb(0, 0, 0);
+    font-size: 45px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+}
+.Title{
+    height: 30px;
+    width: 300px;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin: 0px;
+}
+input::placeholder{
+    color: rgb(0, 0, 0);
+}
+.Content{
+    height: 320px;
+    width: 600px;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin: 0px;
+}
+textarea::placeholder{
+    color: rgb(0, 0, 0);
+}
+.Button{
+    height: 40px;
+    width: 170px;
+    color: white;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    background-color: black;
+    border: 3px solid white;
+    border-radius: 10px 10px 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+.Button:hover{
+    color: black;
+    background-color: white;
+}
+a{
+    text-decoration: none;
+}

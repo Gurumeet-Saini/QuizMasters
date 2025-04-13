@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Englishquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            { question: "A _____ of ships was seen near the coast.", options: ["fleet", "group", "army", "pack"], answer: "fleet" },
+            { question: "The _____ of the play impressed the audience.", options: ["plot", "story", "script", "theme"], answer: "script" },
+            { question: "She was awarded a _____ for her bravery.", options: ["trophy", "medal", "certificate", "badge"], answer: "medal" },
+            { question: "A _____ of bees attacked the intruder.", options: ["herd", "pack", "swarm", "flock"], answer: "swarm" },
+            { question: "The _____ of books fell off the table.", options: ["pile", "stack", "bunch", "group"], answer: "stack" },
+            { question: "We watched the _____ of birds flying in formation.", options: ["herd", "pack", "flock", "troop"], answer: "flock" },
+            { question: "The museum had an ancient _____ of coins.", options: ["gallery", "set", "collection", "display"], answer: "collection" },
+            { question: "A _____ of lions was spotted in the forest.", options: ["herd", "pack", "pride", "flock"], answer: "pride" },
+            { question: "The _____ of the speech was inspiring.", options: ["message", "context", "meaning", "theme"], answer: "message" },
+            { question: "The _____ of a sentence is the person or thing performing the action.", options: ["subject", "object", "verb", "clause"], answer: "subject" },
+            { question: "A _____ of students gathered in the auditorium.", options: ["crowd", "batch", "group", "flock"], answer: "group" },
+            { question: "The _____ of the meeting was decided by the chairman.", options: ["agenda", "summary", "minutes", "report"], answer: "agenda" },
+            { question: "She looked at the _____ with a magnifying glass.", options: ["particle", "molecule", "specimen", "object"], answer: "specimen" },
+            { question: "The company issued a _____ to its shareholders.", options: ["dividend", "statement", "policy", "notice"], answer: "dividend" },
+            { question: "The _____ of the story was gripping and emotional.", options: ["theme", "plot", "outline", "narrative"], answer: "plot" },
+            { question: "Identify the common noun: The dog is barking loudly.", options: ["dog", "barking", "loudly", "The"], answer: "dog" },
+            { question: "Which of the following is a proper noun?", options: ["river", "ocean", "Nile", "water"], answer: "Nile" },
+            { question: "What type of noun is 'happiness'?", options: ["Proper", "Abstract", "Common", "Collective"], answer: "Abstract" },
+            { question: "Choose the collective noun: A _____ of wolves.", options: ["flock", "herd", "pack", "swarm"], answer: "pack" },
+            { question: "Select the correct form: _____ are part of the human skeletal system.", options: ["Bones", "Bons", "Bone", "Bon"], answer: "Bones" },
+            { question: "Fill in the blank: A _____ of musicians performed on stage.", options: ["band", "group", "flock", "herd"], answer: "band" },
+            { question: "The _____ of the novel was thrilling.", options: ["end", "conclusion", "closure", "final"], answer: "conclusion" },
+            { question: "Complete the sentence: The _____ is known for its colorful feathers.", options: ["peacock", "bird", "animal", "creature"], answer: "peacock" },
+            { question: "Select the correct answer: A _____ of fish swam past the boat.", options: ["swarm", "flock", "shoal", "herd"], answer: "shoal" },
+            { question: "Identify the proper noun: Mount Everest is the highest mountain.", options: ["Mount Everest", "highest", "mountain", "the"], answer: "Mount Everest" }
+            ];
+
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

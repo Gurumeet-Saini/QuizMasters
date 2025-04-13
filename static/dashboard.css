@@ -1,0 +1,302 @@
+html,
+body {
+    background-image: url(images/MainPageGuru.png);
+    background-size: 100%;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.knowledge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+}
+
+.MainKnowledgeBox {
+    height: 100px;
+    width: 200px;
+    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+
+.knowledgetext{
+    font-size: 30px;
+    font-family: Showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(253, 43, 78);
+    -webkit-text-stroke-width: 1.10px;
+    margin: 2px;
+}
+
+.knowledgebox {
+    height: 120px;
+    width: 170px;
+    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.funfact{
+    height: 90px;
+    width: 110px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78);
+    cursor: pointer;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+}
+
+.headingbox {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    height: 100px;
+    width: 600px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    height: 80px;
+    width: 80px;
+    border: 3px solid white;
+    border-radius: 10px 10px 10px 10px;
+    margin: 20px;
+}
+
+#mainheading {
+    font-family: Showcard Gothic;
+    font-size: 50px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1.10px;
+}
+
+.navigationbar {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    height: 100px;
+    width: 770px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.navtext1 {
+    font-size: 27px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+    margin: 10px;
+}
+
+.navlinking:hover{
+    color: black;
+}
+
+.navtext4 {
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+    margin: 0px;
+    position: relative;
+    bottom: 20px;
+}
+
+.navlinking {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+#accountimage {
+    height: 100px;
+    width: 100px;
+}
+
+.textdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subheading {
+    margin-top: 60px;
+}
+
+.subheadingbox {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    height: 70px;
+    width: 350px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1.10px;
+    margin-left: 30px;
+}
+
+.quizboxes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 60px;
+}
+
+.box {
+    background-image: url(images/BG5.jpg);
+    background-size: 100%;
+    height: 320px;
+    width: 227.5px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 5px 5px white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+.QuizHeading{
+    font-size: 17px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+    background-color: rgb(253, 43, 78);
+    border: 2px solid white;
+    border-radius: 10px 10px 10px 10px;
+    padding: 4px;
+}
+.quizimages {
+    height: 170px;
+    width: 160px;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0 0 7px 7px white;
+    opacity: 85%;
+    margin: 25px;
+    margin-top: 7px;
+}
+
+.play {
+    font-family: "Carter One", serif;
+    font-size: 18px;
+    font-weight: bolder;
+    height: 33px;
+    width: 110px;
+    color: white;
+    background-color: rgb(253, 43, 78);
+    border: 3px solid white;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.footerbox {
+    background-image: linear-gradient(red, rgb(253, 43, 78));
+    padding: 100px;
+    height: 30px;
+    margin-top: 60px;
+    box-shadow: 0 0 10px 10px white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons {
+    font-size: 50px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1.50px;
+}
+
+.textposition {
+    display: flex;
+    flex-direction: row;
+}
+
+.footertext1 {
+    font-size: 27px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+    margin: 20px;
+}
+
+.footertext2 {
+    font-size: 27px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+}
+
+.play:hover {
+    cursor: pointer;
+    background-color: rgb(253, 43, 78);
+    box-shadow: 0 0 5px 5px rgb(253, 43, 78),
+        0 0 20px 5px rgb(253, 43, 78),
+        0 0 60px 5px rgb(253, 43, 78),
+        0 0 150px 5px rgb(253, 43, 78)
+}
+
+.swal-overlay {
+    background-color: rgba(43, 165, 137, 0.45);
+}
+.swal-modal {
+    background-color: rgba(63,255,106,0.69);
+    border: 3px solid white;
+    border-radius: 40px;
+}
+.swal-icon{
+    height: 400px;
+    width: 500px;
+}
+.swal-text {
+    background-color: rgb(253, 253, 163);
+    padding: 17px;
+    border: 1px solid #F0E1A1;
+    border-radius: 20px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: darkgreen;
+}
+.swal-button {
+    height: 35px;
+    width: 100px;
+    border-radius: 20px;
+    color: white;
+    background-color: darkgreen;
+    font-size: 20px;
+    border: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

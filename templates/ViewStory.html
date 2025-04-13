@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\ViewStory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>QUIZ MASTERS</title>
+</head>
+<body>
+    <h1 class="Heading animate__animated animate__bounceIn">THE ART OF STORYTELLING</h1>
+    <div class="Section">
+        <div class="Box animate__animated animate__bounceIn">
+            <h1 class="SubHeading">START YOUR STORY</h1>
+            <h1 class="Title">{{ story.title }}</h1>
+            <p class="Title" ><strong>By:</strong> {{ story.name }}</p>
+            <p class="Content">{{ story.content }}</p>
+            <a href="{{ url_for('StoryHome') }}"><button type="submit" class="Button">BACK</button></a>
+            </form>            
+        </div>
+    </div>
+</body>
+</html>

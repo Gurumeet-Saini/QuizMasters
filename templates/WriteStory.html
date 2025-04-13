@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\Story.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>QUIZ MASTERS</title>
+</head>
+<body>
+    <h1 class="Heading animate__animated animate__bounceIn">THE ART OF STORYTELLING</h1>
+    <div class="Section">
+        <div class="Box animate__animated animate__bounceIn">
+            <h1 class="SubHeading">START YOUR STORY</h1>
+            <form action="{{ url_for('save_story') }}" method="POST">
+                <input type="text" name="name" placeholder="YOUR NAME" class="Title" required><br><br>
+                <input type="text" name="title" placeholder="STORY TITLE" class="Title" required><br><br>
+                <textarea name="content" placeholder="Write your story here..." rows="17" cols="70" class="Content" required></textarea><br><br>
+                <button type="submit" class="Button">SAVE STORY</button>
+            </form>            
+        </div>
+    </div>
+    <a href="{{url_for('StoryHome')}}"><button type="submit" class="Button" style="margin-top: 20px; margin-bottom: 20px;">BACK</button></a>
+</body>
+</html>

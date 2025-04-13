@@ -1,0 +1,106 @@
+body{
+    background-image: url(images/StoryHomePage.png);
+    background-size: 100%;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0px;
+}
+.Heading{
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(255, 255, 255);
+    -webkit-text-stroke-width: 1.3px;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    border: 4px solid white;
+    border-radius: 7px 7px 7px 7px;
+    padding: 7px;
+}
+.Section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.Box{
+    height: 450px;
+    width: 450px;
+    border: 5px solid rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.SubHeading{
+    color: rgb(0, 0, 0);
+    font-size: 35px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    margin: 0px;
+}
+.Content{
+    color: rgb(0, 0, 0);
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: justify;
+    padding: 10px;
+    margin: 0px;
+}
+.Button{
+    height: 40px;
+    width: 170px;
+    color: white;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    background-color: black;
+    border: 3px solid white;
+    border-radius: 10px 10px 10px;
+    margin-left: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.Button:hover{
+    color: black;
+    background-color: white;
+}
+.CardBox{
+    background-color: rgb(255, 255, 255, 0.4);
+    border: 7px solid black;
+    margin-bottom: 40px;
+}
+.CardHeading{
+    color: White;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+}
+.CardContent{
+    color: white;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    margin: 5px;
+}
+.ViewButton{
+    height: 30px;
+    width: 160px;
+    color: white;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    background-color: black;
+    border: 3px solid white;
+    border-radius: 10px 10px 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+}

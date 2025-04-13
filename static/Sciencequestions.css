@@ -1,0 +1,143 @@
+body{
+    background-image: url(images/ScienceQuiz.png);
+    background-size: 100%;
+    background-attachment: fixed;
+}
+.quizsection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 96vh;
+}
+.quizbox{
+    height: 650px;
+    width: 1000px;
+    background-image: url(images/ScienceQuestion.png);
+    background-size: 120%;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 10px 10px black;
+}
+
+.questionsection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.questionbox{
+    height: 210px;
+    width: 900px;
+    background-color: rgb(255, 255, 255, 0.6);
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 10px 10px black;
+    margin-top: 30px;
+}
+.subheadingbox{
+    height: 45px;
+    width: 180px;
+    background-color: white;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: 0 0 4px 4px black;
+    font-size: 15px;
+    font-family: showcard Gothic;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1.10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+}
+.question{
+    color: black;
+    font-family:'Times New Roman';
+    font-weight: bold;
+    font-size: 35px;
+    margin: 30px;
+}
+
+.MCQSsection{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: baseline;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+.optionbox{
+    height: 50px;
+    width: 380px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 4px solid black;
+    border-radius: 10px 10px 10px 10px ;
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    margin: 10px;
+}
+
+.option-btn{
+    background-color: white;
+    box-shadow: 0 0 3px 3px black;
+    border: none;
+    border-radius: 20px 20px 20px 20px;
+    font-size: 27.5px;
+    font-weight: bold;
+    font-family: 'Times New Roman';
+    height: 35px;
+    width: 350px;
+    margin-left: 14px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+.swal-overlay {
+    background-color: rgba(43, 165, 137, 0.45);
+}
+.swal-modal {
+    background-color: rgba(63,255,106,0.69);
+    border: 3px solid white;
+    border-radius: 40px;
+}
+.swal-title {
+    background-color: rgb(253, 253, 163);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid #F0E1A1;
+    border-radius: 20px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: darkgreen;
+}
+.swal-icon{
+    height: 400px;
+    width: 500px;
+}
+.swal-text {
+    background-color: rgb(253, 253, 163);
+    padding: 17px;
+    border: 1px solid #F0E1A1;
+    border-radius: 20px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: darkgreen;
+}
+.swal-button {
+    height: 35px;
+    width: 100px;
+    border-radius: 20px;
+    color: white;
+    background-color: darkgreen;
+    font-size: 20px;
+    border: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

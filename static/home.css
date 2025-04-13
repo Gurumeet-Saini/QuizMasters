@@ -1,0 +1,105 @@
+body{
+    background-image: url(images/CreateAndLoginPage.png);
+    background-attachment: fixed;
+    background-size: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.heading{
+    -webkit-text-fill-color: rgb(255, 83, 192);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1px;
+    font-size: 50px;
+    font-family: showcard Gothic;
+    font-weight: bolder;
+    box-shadow: 0 0 3px 3px white;
+    background-color: rgba(0, 34, 255, 0.7);
+}
+.Section1{
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    margin-top: 60px;
+}
+.HomeOne{
+    height: 350px;
+    width: 320px;
+    box-shadow: 0 0 7px 7px white;
+    border-radius: 50px 50px 50px 50px;
+    display: flex;
+    position: absolute;
+}
+.Box1{
+    height: 350px;
+    width: 750px;
+    background-color: rgba(0, 34, 255, 0.7);
+    box-shadow: 0 0 7px 7px white;
+    border-radius: 50px 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+.Heading1{
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    margin-right: 15px;
+}
+.ButtonSection{
+    display: flex;
+    flex-direction: row;
+    margin-right: 100px;
+}
+.Button{
+    height: 30px;
+    width: 120px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 22px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgb(255, 217, 0);
+    border: 1px solid white;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 5px 5px white;
+    transition: all 0.3s ease;
+}
+.Button:hover{
+    transform: scale(1.2);
+}
+.footerbox {
+    background-color: rgba(0, 34, 255, 0.7);
+    padding: 100px;
+    height: 10px;
+    margin-top: 60px;
+    box-shadow: 0 0 10px 10px white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.icons {
+    font-size: 50px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 2.10px;
+    transition: all 0.3s ease;
+}
+.icon:hover{
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    -webkit-text-stroke-width: 2.10px;
+}
+.footertext2 {
+    font-size: 27px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    color: white;
+}

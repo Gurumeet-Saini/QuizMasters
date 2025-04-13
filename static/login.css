@@ -1,0 +1,191 @@
+body{
+    background-image: url(images/CreateAndLoginPage.png);
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0px;
+}
+.heading{
+    -webkit-text-fill-color: rgb(255, 83, 192);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1px;
+    font-size: 50px;
+    font-family: showcard Gothic;
+    font-weight: bolder;
+}
+.boxsection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#character{
+    height: 490px;
+    width: 290px;
+    position: absolute;
+    bottom: 330px;
+}
+.Loginbox{
+    height: 490px;
+    width: 400px;
+    background-image: linear-gradient(rgb(169, 169, 255), rgb(255, 152, 217, 0.7));
+    box-shadow: 0 0 7px 7px white;
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    justify-self: center;
+    position: absolute;
+    top: 310px;
+}
+.Loginsection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+.text1{
+    -webkit-text-fill-color: rgb(255, 83, 192);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1px;
+    background-color: rgba(0, 34, 255, 0.7);
+    font-size: 31px;
+    font-weight: bolder;
+    font-family: showcard Gothic;
+    box-shadow: 0 0 4px 4px white;
+    border-radius: 10px 10px 10px 10px;
+    padding: 5px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+.text2{
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 34, 255, 0.7);
+    font-size: 19.5px;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium';
+    text-align: center;
+    box-shadow: 0 0 4px 4px white;
+    border-radius: 10px 10px 10px 10px;
+    width: 290px;
+    padding: 3.5px;
+    margin-top: 0px;
+}
+.form{
+    height: 30px;
+    width: 290px;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium';
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgba(0, 34, 255, 0.7);
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 0 4px 4px white;
+    border-radius: 10px 10px 10px 10px;
+    outline: none;
+    margin-top: 20px;
+}
+input::placeholder{
+    color: rgb(255, 255, 255);
+}
+.submitbutton{
+    height: 50px;
+    width: 200px;
+    font-size: 31px;
+    font-weight: bolder;
+    -webkit-text-fill-color: rgb(255, 83, 192);
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 1px;
+    font-family: showcard Gothic;
+    text-align: center;
+    border: 1px solid rgb(169, 169, 255);
+    box-shadow: 0 0 4px 4px white;
+    background-color: rgba(0, 34, 255, 0.7);
+    border-radius: 20px 20px 20px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+.submitbutton:hover{
+    transform: scale(1.1);
+}
+.backbutton{
+    height: 30px;
+    width: 120px;
+    color: white;
+    font-size: 26px;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium';
+    text-align: center;
+    border: 1px solid rgb(169, 169, 255);
+    box-shadow: 0 0 4px 4px white;
+    background-color: rgba(0, 34, 255, 0.7);
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+.backbutton:hover{
+    transform: scale(1.1);
+}
+a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+.swal-overlay {
+    background-color: rgb(255, 152, 217, 0.3);
+}
+.swal-modal {
+    background-color: rgb(169, 169, 255, 0.7);
+    border: 3px solid white;
+    border-radius: 40px;
+}
+.swal-title {
+    background-color: rgba(0, 34, 255, 0.7);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 1px solid white;
+    box-shadow: 0 0 3px 3px white;
+    border-radius: 20px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: white;
+}
+.swal-icon{
+    height: 300px;
+    width: 300px;
+}
+.swal-text {
+    background-color: rgba(0, 34, 255, 0.7);
+    padding: 17px;
+    border: 1px solid white;
+    box-shadow: 0 0 3px 3px white;
+    border-radius: 20px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: white;
+}
+.swal-button {
+    height: 35px;
+    width: 100px;
+    border-radius: 20px;
+    color: white;
+    background-color: rgba(0, 34, 255, 0.7);
+    font-size: 20px;
+    border: 1px solid white;
+    box-shadow: 0 0 3px 3px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

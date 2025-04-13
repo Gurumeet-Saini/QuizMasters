@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\feedback.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <title>QUIZ MASTERS</title>
+</head>
+<body>
+    <marquee behavior="alternate" direction="right" scrollamount="20" class="heading animate__animated animate__zoomIn" >YOUR OPINION MATTERS!</marquee>
+    <div class="boxsection">
+        <img src="\static\images\Character.png" alt="character" id="character" class="animate__animated animate__zoomIn">
+        <div class="Registerbox animate__animated animate__zoomIn">
+            <form class="feedbackform" id="feedbackform" method="POST">
+                <h2 class="text1">FEEDBACK FORM</h2>
+                <input type="text" class="form" placeholder="NAME" style="margin-top: 0px;" name="user_name" id="n1" required>
+                <input type="email" class="form" placeholder="EMAIL" name="user_email" id="n2" required>
+                <textarea class="form" placeholder="WRITE HERE" style="height: 150px;" name="user_message" id="n3" required></textarea>
+                <button type="submit" class="submitbutton">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+    <script>
+      emailjs.init("1gb1RN3mVLb8WNL-W");
+    
+      document.getElementById("feedbackform").addEventListener("submit", function(e) {
+        e.preventDefault();
+    
+        emailjs.sendForm("service_s0q2vq8", "template_g8s0oz8", this)
+          .then(function(response) {
+            console.log("SUCCESS!", response.status, response.text);
+
+            swal({
+              title: "THANK YOU!",
+              text: "Your feedback has been sent.",
+              icon: "/static/images/Congrats.jpg",
+              button: "OK",
+          }).then(() => {
+            window.location.href = "{{url_for('home')}}";
+          });  
+          }, function(error) {
+            console.log("FAILED...", error);
+            swal({
+              title: "ERROR!",
+              text: '"Oops!", "Something went wrong. Please try again.", "error"',
+              icon: "warning",
+              button: "OK",
+          });
+          });
+      });
+    </script> 
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\GKquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            { question: "What is the second largest country in the world by land area?", options: ["United States", "Russia", "Canada", "China"], answer: "Canada" },
+            { question: "What is the unit of currency in South Korea?", options: ["Won", "Yen", "Yuan", "Ringgit"], answer: "Won" },
+            { question: "Which element has the chemical symbol 'Pb'?", options: ["Potassium", "Platinum", "Lead", "Phosphorus"], answer: "Lead" },
+            { question: "What is the largest island in the world?", options: ["Greenland", "Madagascar", "Borneo", "New Guinea"], answer: "Greenland" },
+            { question: "What is the official language of Brazil?", options: ["Spanish", "Portuguese", "French", "English"], answer: "Portuguese" },
+            { question: "What does the Richter scale measure?", options: ["Wind speed", "Earthquake intensity", "Rainfall", "Temperature"], answer: "Earthquake intensity" },
+            { question: "Which country is known as the Land of the Rising Sun?", options: ["Thailand", "China", "Japan", "Vietnam"], answer: "Japan" },
+            { question: "Who was the first female Prime Minister of India?", options: ["Sonia Gandhi", "Pratibha Patil", "Indira Gandhi", "Sarojini Naidu"], answer: "Indira Gandhi" },
+            { question: "What is the name of the world’s longest river?", options: ["Amazon", "Yangtze", "Mississippi", "Nile"], answer: "Nile" },
+            { question: "Which scientist proposed the theory of relativity?", options: ["Albert Einstein", "Galileo Galilei", "Stephen Hawking", "Isaac Newton"], answer: "Albert Einstein" },
+            { question: "Which continent has the most countries?", options: ["Africa", "Asia", "Europe", "South America"], answer: "Africa" },
+            { question: "What is the only metal that is liquid at room temperature?", options: ["Mercury", "Gold", "Silver", "Iron"], answer: "Mercury" },
+            { question: "Which country is home to the Great Barrier Reef?", options: ["Australia", "Indonesia", "Fiji", "New Zealand"], answer: "Australia" },
+            { question: "In which year did the Titanic sink?", options: ["1908", "1912", "1916", "1920"], answer: "1912" },
+            { question: "Who was the first President of India?", options: ["Rajendra Prasad", "Jawaharlal Nehru", "Sardar Patel", "Sarvepalli Radhakrishnan"], answer: "Rajendra Prasad" },
+            { question: "Which is the largest state in India by area?", options: ["Uttar Pradesh", "Rajasthan", "Madhya Pradesh", "Maharashtra"], answer: "Rajasthan" },
+            { question: "Which river is known as the 'Sorrow of Bihar'?", options: ["Ganga", "Kosi", "Brahmaputra", "Son"], answer: "Kosi" },
+            { question: "Which Indian city is known as the 'Silicon Valley of India'?", options: ["Hyderabad", "Bangalore", "Pune", "Chennai"], answer: "Bangalore" },
+            { question: "What is the national tree of India?", options: ["Neem", "Banyan", "Peepal", "Mango"], answer: "Banyan" },
+            { question: "Who wrote the Indian National Anthem?", options: ["Rabindranath Tagore", "Bankim Chandra Chatterjee", "Sarojini Naidu", "Subhash Chandra Bose"], answer: "Rabindranath Tagore" },
+            { question: "Which is the smallest state in India by area?", options: ["Goa", "Sikkim", "Tripura", "Manipur"], answer: "Goa" },
+            { question: "Which Indian monument is also known as the 'Monument of Love'?", options: ["Qutub Minar", "Taj Mahal", "Charminar", "Gateway of India"], answer: "Taj Mahal" },
+            { question: "Who is known as the 'Missile Man of India'?", options: ["Dr. Vikram Sarabhai", "Homi Bhabha", "Dr. A.P.J. Abdul Kalam", "Satish Dhawan"], answer: "Dr. A.P.J. Abdul Kalam" },
+            { question: "What is the official language of Nagaland?", options: ["Hindi", "English", "Nagamese", "Assamese"], answer: "English" },
+            { question: "What is the largest organ in the human body?", options: ["Heart", "Brain", "Skin", "Liver"], answer: "Skin" }
+            ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

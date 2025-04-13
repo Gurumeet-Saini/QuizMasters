@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\result page.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="topsection">
+        <div class="quizbox animate__animated animate__jackInTheBox" style="box-shadow: 0 0 7px 7px black;">
+            <div id="resultbox1" class="animate__animated animate__jackInTheBox animate__delay-1s"></div>
+            <div id="resultbox2" class="animate__animated animate__jackInTheBox animate__delay-1s"></div>
+            <button class="play2 animate__animated animate__jackInTheBox animate__delay-1s" onclick="main()">HOME</button>
+        </div>
+    </div>
+    <script>
+        const results = JSON.parse(localStorage.getItem('results')) || { correct: 0, incorrect: 0 };
+
+        const resultsBox1 = document.getElementById('resultbox1');
+        const resultsBox2 = document.getElementById('resultbox2');
+        resultsBox1.innerHTML = `
+            <p>CORRECT ANSWERS: ${results.correct}</p>
+        `;
+        resultsBox2.innerHTML = `
+            <p>INCORRECT ANSWERS: ${results.incorrect}</p>
+        `;
+        function main() {
+        localStorage.removeItem('results');
+        window.location.href = "{{url_for('dashboard')}}";
+        }
+    </script>
+</body>
+</html>

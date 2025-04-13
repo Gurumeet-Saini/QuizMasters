@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Englishquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            { question: "She ____ to the market every Sunday.", options: ["goes", "going", "gone", "go"], answer: "goes" },
+            { question: "He ____ the homework before dinner.", options: ["does", "doing", "did", "done"], answer: "does" },
+            { question: "The dog ____ loudly at night.", options: ["barks", "barking", "barked", "bark"], answer: "barks" },
+            { question: "They ____ a new house last year.", options: ["buy", "bought", "buying", "buys"], answer: "bought" },
+            { question: "We ____ for the train at the station.", options: ["wait", "waiting", "waited", "waits"], answer: "waited" },
+            { question: "She ____ the book on the table.", options: ["placed", "placing", "places", "place"], answer: "placed" },
+            { question: "I ____ to music in my free time.", options: ["listen", "listening", "listened", "listens"], answer: "listen" },
+            { question: "He ____ a letter to his friend yesterday.", options: ["writes", "wrote", "writing", "write"], answer: "wrote" },
+            { question: "They ____ the car to the garage.", options: ["take", "took", "taking", "takes"], answer: "took" },
+            { question: "She ____ her keys on the table.", options: ["find", "found", "finding", "finds"], answer: "found" },
+            { question: "The teacher ____ us a new topic today.", options: ["teaches", "taught", "teaching", "teach"], answer: "taught" },
+            { question: "We ____ football in the evening.", options: ["play", "played", "playing", "plays"], answer: "play" },
+            { question: "The baby ____ when she is hungry.", options: ["cries", "crying", "cried", "cry"], answer: "cries" },
+            { question: "He ____ a cup of tea every morning.", options: ["drinks", "drank", "drunk", "drink"], answer: "drinks" },
+            { question: "We ____ a movie last weekend.", options: ["watch", "watched", "watching", "watches"], answer: "watched" },
+            { question: "Which of the following is a verb?", options: ["Tree", "Run", "Beautiful", "Fast"], answer: "Run" },
+            { question: "Identify the correct verb in the sentence: 'She sings beautifully.'", options: ["She", "sings", "beautifully", "None"], answer: "sings" },
+            { question: "What is the past tense of 'go'?", options: ["goes", "went", "going", "gone"], answer: "went" },
+            { question: "What is the base form of the verb in 'He was running'?", options: ["run", "ran", "running", "runs"], answer: "run" },
+            { question: "Which of the following is NOT a verb?", options: ["Read", "Eat", "Sky", "Jump"], answer: "Sky" },
+            { question: "What is the third person singular form of 'run'?", options: ["running", "ran", "runs", "run"], answer: "runs" },
+            { question: "Which verb completes this sentence? 'She ____ the cake yesterday.'", options: ["bake", "bakes", "baking", "baked"], answer: "baked" },
+            { question: "What is the past participle of 'write'?", options: ["written", "wrote", "writing", "writes"], answer: "written" },
+            { question: "Which sentence contains an action verb?", options: ["She is happy.", "He runs fast.", "The sky is blue.", "It was cold."], answer: "He runs fast." },
+            { question: "Which verb form is used in the sentence: 'They are dancing'?", options: ["Present", "Past", "Present Continuous", "Future"], answer: "Present Continuous" }
+            ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

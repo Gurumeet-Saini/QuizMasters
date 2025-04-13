@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\static\register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='register.js') }}"></script>
+    <title>QUIZ MASTERS</title>
+</head>
+<body>
+    <marquee behavior="alternate" direction="right" scrollamount="20" class="heading animate__animated animate__zoomIn" >JOIN QUIZ MASTERS TODAY!</marquee>
+    <div class="boxsection">
+        <img src="\static\images\Character.png" alt="character" id="character" class="animate__animated animate__zoomIn">
+        <div class="Registerbox animate__animated animate__zoomIn">
+            <form class="Registersection" id="registerform" method="POST">
+                <h2 class="text1">CREATE ACCOUNT</h2>
+                <h2 class="text2"><b>ALREADY HAVE AN ACCOUNT? <a href="{{url_for('login')}}">SIGN IN</a></b></h2>
+                <input type="text" class="form" placeholder="NAME" style="margin-top: 0px;" name="name" id="n1" required>
+                <input type="text" class="form" placeholder="USERNAME" name="username" id="n2" required>
+                <input type="text" class="form" placeholder="EMAIL" name="email" id="n3" required>
+                <input type="password" class="form" placeholder="PASSWORD" name="password" id="n4" required>
+                <button type="submit" class="submitbutton">REGISTER</button>
+                <a href="{{url_for('home')}}"><button type="button" class="backbutton">HOME</button></a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

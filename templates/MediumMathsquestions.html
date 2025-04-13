@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Mathsquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+        { question: "What is the value of 7^2?", options: ["49", "42", "56", "63"], answer: "49" },
+        { question: "What is the perimeter of a rectangle with length 5 cm and width 3 cm?", options: ["16 cm", "15 cm", "12 cm", "10 cm"], answer: "16 cm" },
+        { question: "What is the value of 5! (factorial)?", options: ["120", "60", "100", "24"], answer: "120" },
+        { question: "What is the square root of 144?", options: ["12", "14", "10", "16"], answer: "12" },
+        { question: "What is the result of 8 × 7?", options: ["56", "64", "48", "42"], answer: "56" },
+        { question: "If x = 5, what is the value of 2x + 3?", options: ["13", "10", "11", "9"], answer: "13" },
+        { question: "What is the area of a circle with radius 3 cm?", options: ["28.27 cm²", "18.84 cm²", "12.56 cm²", "30.00 cm²"], answer: "28.27 cm²" },
+        { question: "What is the value of (3 + 5) × 2?", options: ["16", "18", "14", "12"], answer: "16" },
+        { question: "Which of the following is a prime number?", options: ["9", "11", "15", "20"], answer: "11" },
+        { question: "What is the value of 100 ÷ 5?", options: ["20", "25", "15", "30"], answer: "20" },
+        { question: "What is the result of 2^3?", options: ["8", "4", "16", "2"], answer: "8" },
+        { question: "What is the area of a triangle with base 6 cm and height 4 cm?", options: ["12 cm²", "24 cm²", "18 cm²", "14 cm²"], answer: "12 cm²" },
+        { question: "What is the value of 45 ÷ 9?", options: ["5", "6", "4", "3"], answer: "5" },
+        { question: "What is the perimeter of a square with side length 8 cm?", options: ["32 cm", "24 cm", "16 cm", "36 cm"], answer: "32 cm" },
+        { question: "What is 25% of 200?", options: ["50", "40", "30", "60"], answer: "50" },
+        { question: "What is the greatest common divisor of 36 and 48?", options: ["12", "18", "24", "6"], answer: "12" },
+        { question: "What is 15 × 6?", options: ["90", "100", "110", "80"], answer: "90" },
+        { question: "What is the volume of a cube with side length 4 cm?", options: ["64 cm³", "48 cm³", "32 cm³", "16 cm³"], answer: "64 cm³" },
+        { question: "What is the result of 3 × (2 + 4)?", options: ["18", "12", "15", "14"], answer: "18" },
+        { question: "What is the value of 9^2?", options: ["81", "72", "63", "90"], answer: "81" },
+        { question: "What is the result of 6 ÷ 2 × (1 + 2)?", options: ["9", "8", "7", "10"], answer: "9" },
+        { question: "Which of the following is a multiple of 7?", options: ["20", "28", "35", "40"], answer: "28" },
+        { question: "What is the sum of angles in a triangle?", options: ["180°", "360°", "90°", "270°"], answer: "180°" },
+        { question: "What is the difference between 50 and 23?", options: ["27", "30", "25", "20"], answer: "27" },
+        { question: "What is 3 × 3 + 6?", options: ["15", "12", "9", "18"], answer: "15" },
+        { question: "What is the value of 6^2?", options: ["36", "30", "40", "50"], answer: "36" }
+        ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

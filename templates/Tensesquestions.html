@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Englishquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            { question: "She ___ to the market every day.", options: ["go", "goes", "gone", "going"], answer: "goes" },
+            { question: "They ___ football yesterday.", options: ["play", "plays", "played", "playing"], answer: "played" },
+            { question: "I ___ my homework before dinner every day.", options: ["finish", "finished", "finishing", "finishes"], answer: "finish" },
+            { question: "We ___ to the park tomorrow.", options: ["go", "going", "will go", "gone"], answer: "will go" },
+            { question: "He ___ his car last week.", options: ["sells", "selling", "sold", "sell"], answer: "sold" },
+            { question: "She ___ a novel when I called.", options: ["read", "reads", "reading", "was reading"], answer: "was reading" },
+            { question: "They ___ in this city since 2010.", options: ["live", "lives", "lived", "have lived"], answer: "have lived" },
+            { question: "The baby ___ when the bell rang.", options: ["sleep", "sleeps", "was sleeping", "slept"], answer: "was sleeping" },
+            { question: "I ___ to the office before the rain started.", options: ["reached", "reaches", "reach", "reaching"], answer: "reached" },
+            { question: "She ___ the dishes by the time I arrived.", options: ["washes", "washed", "had washed", "wash"], answer: "had washed" },
+            { question: "They ___ to the party if they had known about it.", options: ["come", "came", "would come", "would have come"], answer: "would have come" },
+            { question: "The train ___ when we reached the station.", options: ["leaves", "left", "was leaving", "had left"], answer: "had left" },
+            { question: "I ___ my keys. Can you help me find them?", options: ["lose", "lost", "have lost", "am losing"], answer: "have lost" },
+            { question: "He ___ TV for two hours now.", options: ["watches", "watched", "has been watching", "is watching"], answer: "has been watching" },
+            { question: "They ___ to the museum next week.", options: ["go", "are going", "went", "goes"], answer: "are going" },
+            { question: "Which tense is used for actions that are happening right now?", options: ["Present Simple", "Present Continuous", "Past Simple", "Future Simple"], answer: "Present Continuous" },
+            { question: "Which tense is used for completed actions in the past?", options: ["Past Continuous", "Present Perfect", "Past Simple", "Future Perfect"], answer: "Past Simple" },
+            { question: "What is the helping verb for the Future Simple tense?", options: ["was", "is", "will", "have"], answer: "will" },
+            { question: "Which tense is used to describe habitual actions?", options: ["Present Perfect", "Past Continuous", "Present Simple", "Future Continuous"], answer: "Present Simple" },
+            { question: "Which tense uses 'had' as a helping verb?", options: ["Past Perfect", "Present Perfect", "Future Perfect", "Present Continuous"], answer: "Past Perfect" },
+            { question: "What is the structure of the Present Perfect tense?", options: ["Subject + has/have + past participle", "Subject + is/are + ing", "Subject + was/were + ing", "Subject + will + base verb"], answer: "Subject + has/have + past participle" },
+            { question: "Which tense is used for actions that were ongoing in the past?", options: ["Past Simple", "Past Continuous", "Present Continuous", "Future Continuous"], answer: "Past Continuous" },
+            { question: "Which tense uses 'will have' as a helping verb?", options: ["Future Simple", "Future Perfect", "Present Perfect", "Past Perfect"], answer: "Future Perfect" },
+            { question: "Which tense is used for planned future actions?", options: ["Future Simple", "Present Continuous", "Past Simple", "Future Perfect"], answer: "Present Continuous" },
+            { question: "Which tense is used for actions completed recently?", options: ["Present Perfect", "Past Simple", "Future Simple", "Present Simple"], answer: "Present Perfect" }
+            ];
+
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

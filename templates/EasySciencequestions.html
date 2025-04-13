@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Sciencequestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+        const questions = [
+        { question: "What planet is known as the Red Planet?", options: ["Mars", "Earth", "Venus", "Jupiter"], answer: "Mars" },
+        { question: "What gas do plants absorb from the atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Helium"], answer: "Carbon Dioxide" },
+        { question: "What is the boiling point of water at sea level?", options: ["100°C", "90°C", "110°C", "120°C"], answer: "100°C" },
+        { question: "What part of the plant conducts photosynthesis?", options: ["Root", "Stem", "Leaf", "Flower"], answer: "Leaf" },
+        { question: "What is the center of an atom called?", options: ["Nucleus", "Electron", "Proton", "Neutron"], answer: "Nucleus" },
+        { question: "What is the largest organ in the human body?", options: ["Heart", "Skin", "Liver", "Brain"], answer: "Skin" },
+        { question: "What force pulls objects toward Earth?", options: ["Magnetism", "Gravity", "Friction", "Inertia"], answer: "Gravity" },
+        { question: "What is the chemical symbol for water?", options: ["H2O", "O2", "NaCl", "CO2"], answer: "H2O" },
+        { question: "What type of energy does the Sun produce?", options: ["Kinetic", "Thermal", "Solar", "Nuclear"], answer: "Solar" },
+        { question: "How many planets are in the solar system?", options: ["7", "8", "9", "10"], answer: "8" },
+        { question: "What do bees collect from flowers?", options: ["Nectar", "Pollen", "Seeds", "Sap"], answer: "Nectar" },
+        { question: "What is the hardest natural substance on Earth?", options: ["Gold", "Iron", "Diamond", "Quartz"], answer: "Diamond" },
+        { question: "What gas do humans breathe in to survive?", options: ["Oxygen", "Carbon Dioxide", "Hydrogen", "Nitrogen"], answer: "Oxygen" },
+        { question: "What is the smallest unit of life?", options: ["Organ", "Cell", "Molecule", "Atom"], answer: "Cell" },
+        { question: "What organ pumps blood through the body?", options: ["Liver", "Lungs", "Heart", "Kidneys"], answer: "Heart" },
+        { question: "What is the closest star to Earth?", options: ["Sirius", "Alpha Centauri", "Sun", "Proxima Centauri"], answer: "Sun" },
+        { question: "What is the main component of the Sun?", options: ["Oxygen", "Hydrogen", "Helium", "Carbon"], answer: "Hydrogen" },
+        { question: "What is the chemical symbol for gold?", options: ["Gd", "Ag", "Au", "Go"], answer: "Au" },
+        { question: "What is the primary source of energy for the Earth?", options: ["Moon", "Sun", "Volcanoes", "Ocean"], answer: "Sun" },
+        { question: "What is the freezing point of water?", options: ["32°F", "0°C", "Both A and B", "None"], answer: "Both A and B" },
+        { question: "What is the main gas found in the air we breathe?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], answer: "Nitrogen" },
+        { question: "What planet is closest to the Sun?", options: ["Mercury", "Venus", "Earth", "Mars"], answer: "Mercury" },
+        { question: "What is the process by which plants make food?", options: ["Digestion", "Photosynthesis", "Respiration", "Evaporation"], answer: "Photosynthesis" },
+        { question: "What is the name of the galaxy we live in?", options: ["Andromeda", "Milky Way", "Whirlpool", "Pinwheel"], answer: "Milky Way" },
+        { question: "What do we call animals that eat only plants?", options: ["Carnivores", "Herbivores", "Omnivores", "Insectivores"], answer: "Herbivores" }
+          ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>

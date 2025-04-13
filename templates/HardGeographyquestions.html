@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ MASTERS</title>
+    <link rel="stylesheet" type="text/css" href="\static\Geographyquestions.css">
+    <link rel="icon" type="image/x-icon" href="LOGO.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="quizsection">
+        <div class="quizbox animate__animated animate__bounceInDown">
+            <div class="questionsection">
+                <div class="questionbox">
+                    <div class="subheadingbox"><h1>QUESTION</h1></div>
+                    <div class="question" id="question"></div>
+                </div>
+            </div>
+            <div class="MCQSsection">
+                <div class="optionbox"><button class="option-btn" id="option1"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option2"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option3"></button></div>
+                <div class="optionbox"><button class="option-btn" id="option4"></button></div>
+            </div>
+        </div>
+    </div>
+    <script>
+                var sound1=new Audio();
+        sound1.src='/static/sounds/RESULT.wav';
+        
+        function playSound(type){
+            let audio;
+            if (type === 'victory'){
+                audio=new Audio('/static/sounds/VICTORY.wav');
+            } else if (type === 'loss'){
+                audio=new Audio('/static/sounds/LOSS.mp3');
+            }
+            audio.play();
+        }
+        localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+
+        if (!localStorage.getItem('results')) {
+            localStorage.setItem('results', JSON.stringify({ correct: 0, incorrect: 0 }));
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+            { question: "Which country is home to the world's tallest building, the Burj Khalifa?", options: ["Saudi Arabia", "United Arab Emirates", "Qatar", "Kuwait"], answer: "United Arab Emirates" },
+            { question: "What is the capital of Kazakhstan?", options: ["Almaty", "Astana", "Bishkek", "Tashkent"], answer: "Astana" },
+            { question: "What is the largest island in the Mediterranean Sea?", options: ["Cyprus", "Sicily", "Crete", "Corsica"], answer: "Sicily" },
+            { question: "Which country is known as the 'Land of the Long White Cloud'?", options: ["Australia", "New Zealand", "Fiji", "Samoa"], answer: "New Zealand" },
+            { question: "Which country has the most pyramids?", options: ["Egypt", "Sudan", "Mexico", "Peru"], answer: "Sudan" },
+            { question: "In which country is the largest salt flat in the world located?", options: ["Chile", "Argentina", "Bolivia", "Peru"], answer: "Bolivia" },
+            { question: "Which ocean lies to the east of Africa?", options: ["Atlantic", "Indian", "Pacific", "Southern"], answer: "Indian" },
+            { question: "Which is the longest river in Europe?", options: ["Volga", "Danube", "Rhine", "Thames"], answer: "Volga" },
+            { question: "Which country is known for the geothermal activity in the Blue Lagoon?", options: ["Iceland", "New Zealand", "Japan", "Costa Rica"], answer: "Iceland" },
+            { question: "What is the capital of Mongolia?", options: ["Ulaanbaatar", "Astana", "Tashkent", "Bishkek"], answer: "Ulaanbaatar" },
+            { question: "Which Indian city is known as the 'City of Joy'?", options: ["Mumbai", "Delhi", "Kolkata", "Chennai"], answer: "Kolkata" },
+            { question: "Which is the second-largest state in India by area?", options: ["Madhya Pradesh", "Maharashtra", "Uttar Pradesh", "Rajasthan"], answer: "Madhya Pradesh" },
+            { question: "What is the southernmost point of India?", options: ["Indira Point", "Kanyakumari", "Dhanushkodi", "Cape Comorin"], answer: "Indira Point" },
+            { question: "Which state in India is known as the 'Spice Garden of India'?", options: ["Kerala", "Goa", "Tamil Nadu", "Karnataka"], answer: "Kerala" },
+            { question: "Which river flows through the city of Varanasi?", options: ["Ganga", "Yamuna", "Brahmaputra", "Narmada"], answer: "Ganga" },
+            { question: "Which state in India is known for the Baisakhi festival?", options: ["Punjab", "Haryana", "Rajasthan", "Uttarakhand"], answer: "Punjab" },
+            { question: "What is the official language of the state of Tamil Nadu?", options: ["Tamil", "Telugu", "Hindi", "Kannada"], answer: "Tamil" },
+            { question: "Which is the largest lake in India?", options: ["Vembanad", "Sambhar", "Dal Lake", "Chilika Lake"], answer: "Vembanad" },
+            { question: "Which Indian state is known as the 'Gateway to the Northeast'?", options: ["Assam", "Nagaland", "Meghalaya", "Tripura"], answer: "Assam" },
+            { question: "What is the capital of the Indian state of Goa?", options: ["Panaji", "Margao", "Vasco da Gama", "Mapusa"], answer: "Panaji" },
+            { question: "Which city is known as the 'Financial Capital of India'?", options: ["Delhi", "Bangalore", "Chennai", "Mumbai"], answer: "Mumbai" },
+            { question: "Which Indian state is known for the Khajuraho temples?", options: ["Madhya Pradesh", "Uttar Pradesh", "Rajasthan", "Himachal Pradesh"], answer: "Madhya Pradesh" },
+            { question: "Which river is the primary source of water for the city of Hyderabad?", options: ["Godavari", "Krishna", "Narmada", "Mahanadi"], answer: "Godavari" },
+            { question: "Which mountain range forms the northern boundary of India?", options: ["Himalayas", "Western Ghats", "Aravalli Range", "Vindhya Range"], answer: "Himalayas" },
+            { question: "Which state in India is famous for its tea gardens and wildlife sanctuary at Kaziranga?", options: ["Assam", "West Bengal", "Arunachal Pradesh", "Nagaland"], answer: "Assam" },
+            { question: "What is the capital of the Indian state of Bihar?", options: ["Patna", "Gaya", "Muzaffarpur", "Darbhanga"], answer: "Patna" },
+            { question: "Which is the first state in India to be formed on a linguistic basis?", options: ["Andhra Pradesh", "Tamil Nadu", "Uttarakhand", "Haryana"], answer: "Andhra Pradesh" },
+            { question: "Which city is known as the 'City of Lakes' in India?", options: ["Udaipur", "Bhopal", "Kochi", "Rishikesh"], answer: "Udaipur" }
+            ];
+        
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        const selectedQuestions = shuffle([...questions]).slice(0, 5);
+        let currentQuestionIndex = 0;
+        const results = JSON.parse(localStorage.getItem('results'));
+        
+        function loadQuestion() {
+          if (currentQuestionIndex < selectedQuestions.length) {
+            const question = selectedQuestions[currentQuestionIndex];
+            const shuffledOptions = shuffle([...question.options]);
+        
+            document.getElementById('question').innerText = question.question;
+        
+            document.getElementById('option1').innerText = shuffledOptions[0];
+            document.getElementById('option2').innerText = shuffledOptions[1];
+            document.getElementById('option3').innerText = shuffledOptions[2];
+            document.getElementById('option4').innerText = shuffledOptions[3];
+        
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+              btn.onclick = () => {
+                const correctAnswer = question.answer;
+                if (shuffledOptions[index] === question.answer) {
+                    results.correct += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('victory');
+                    swal({
+                    title: "CORRECT ANSWER",
+                    text: `Great Job! ✅\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/CORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                } else {
+                    results.incorrect += 1;
+                    localStorage.setItem('results', JSON.stringify(results));
+                    playSound('loss');
+                    swal({
+                    title: "INCORRECT ANSWER",
+                    text: `Oops! ❌\nThe correct answer is: ${correctAnswer}`,
+                    icon: "/static/images/INCORRECTPOPUP.png",
+                    button: "OK",
+                    }).then(() => {
+                if (currentQuestionIndex === selectedQuestions.length - 1) {
+                    showResults();
+                } else {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }
+                });
+                }
+              };
+            });
+          }
+        }
+        
+        function showResults() {
+            sound1.play();
+            swal({
+            title: "QUIZ IS OVER",
+            text: "Proceeds next.",
+            icon: "/static/images/RESULTPOPUP.png",
+            button: "NEXT",
+            }).then(() => {
+            window.location.href = "{{url_for('Result')}}";
+            });
+        }
+        
+        loadQuestion();
+        });
+    </script>
+</body>
+</html>
