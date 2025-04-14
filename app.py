@@ -2,11 +2,10 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 import time
-import os
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgresql://userdata_rigq_user:UwIgIHpQ3GeZE2ybxQu0OG9bZJzobXBA@dpg-cvugfbq4d50c73av8gr0-a/userdata_rigq')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 
 db = SQLAlchemy(app)
 
