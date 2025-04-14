@@ -31,7 +31,7 @@ body {
 
 .knowledgetext{
     font-size: 30px;
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: rgb(253, 43, 78);
     -webkit-text-stroke-width: 1.10px;
@@ -86,7 +86,7 @@ body {
 }
 
 #mainheading {
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     font-size: 50px;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
@@ -158,7 +158,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 1.10px;
@@ -262,6 +262,33 @@ body {
         0 0 20px 5px rgb(253, 43, 78),
         0 0 60px 5px rgb(253, 43, 78),
         0 0 150px 5px rgb(253, 43, 78)
+}
+
+.Button{
+    height: 40px;
+    width: 170px;
+    color: white;
+    font-size: 23px;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: bolder;
+    background-color: rgb(253, 43, 78);
+    border: 3px solid white;
+    border-radius: 10px 10px 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    margin: 10px;
+}
+.Button:hover{
+    color: black;
+    background-color: white;
+}
+
+#back{
+    text-decoration: none;
 }
 
 .swal-overlay {

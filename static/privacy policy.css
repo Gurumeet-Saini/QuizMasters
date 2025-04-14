@@ -37,7 +37,7 @@ body {
 
 .knowledgetext{
     font-size: 30px;
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: rgb(253, 43, 78);
     -webkit-text-stroke-width: 1.10px;
@@ -91,7 +91,7 @@ body {
 }
 
 #mainheading {
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     font-size: 50px;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
@@ -180,7 +180,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: rgb(56, 66, 255);
     -webkit-text-stroke-width: 1.10px;
@@ -189,7 +189,7 @@ body {
 
 .ContentText{
     font-size: 24px;
-    font-family: 'Times New Roman';
+    font-family: 'Franklin Gothic Medium';
     color: rgb(56, 66, 255);
     text-align: justify;
     margin: 30px;
@@ -208,7 +208,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: rgb(0, 162, 255);
     -webkit-text-stroke-width: 1.10px;
@@ -217,7 +217,7 @@ body {
 
 .text{
     font-size: 24px;
-    font-family: 'Times New Roman';
+    font-family: 'Franklin Gothic Medium';
     color: rgb(0, 162, 255);
     text-align: justify;
     margin: 30px;

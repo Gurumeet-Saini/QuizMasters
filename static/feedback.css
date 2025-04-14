@@ -12,7 +12,7 @@ body{
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 1px;
     font-size: 50px;
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     font-weight: bolder;
 }
 .boxsection{
@@ -52,7 +52,7 @@ body{
     background-color: rgba(0, 34, 255, 0.7);
     font-size: 31px;
     font-weight: bolder;
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     box-shadow: 0 0 4px 4px white;
     border-radius: 10px 10px 10px 10px;
     padding: 5px;
@@ -88,7 +88,7 @@ textarea::placeholder{
     -webkit-text-fill-color: rgb(255, 83, 192);
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 1px;
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     text-align: center;
     border: 1px solid rgb(169, 169, 255);
     box-shadow: 0 0 4px 4px white;

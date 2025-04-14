@@ -62,21 +62,21 @@ body{
     margin-bottom: 225px;
 }
 .heading1{
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 1.10px;
     font-size: 30px;
 }
 .heading2{
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: rgb(255, 255, 255);
     -webkit-text-stroke-width: 1.10px;
     font-size: 30px;
 }
 .heading3{
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: rgb(255, 255, 255);
     -webkit-text-stroke-width: 1.10px;

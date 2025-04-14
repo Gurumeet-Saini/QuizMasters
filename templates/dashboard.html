@@ -10,13 +10,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script src="https://kit.fontawesome.com/beb166c732.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Showcard+Gothic&display=swap" rel="stylesheet">
     <script type="text/javascript" src="\static\dashboard.js"></script>
+    <link rel="preload" as="image" href="images/MainPageGuru.png">
 </head>
 <body>
     <div class="knowledge">
         <div class="MainKnowledgeBox animate__animated animate__lightSpeedInLeft"><h3 class="knowledgetext animate__animated animate__tada animate__repeat-2 animate__delay-1s">EXPLORE</h3><h3 class="knowledgetext animate__animated animate__tada animate__repeat-2 animate__delay-1s">MORE</h3></div>
         <div class="knowledgebox animate__animated animate__lightSpeedInLeft"><img src="\static\images\K1.png" alt="fun fact" class="funfact animate__animated animate__tada animate__repeat-2 animate__delay-1s" onclick="funfact1()"></div>
         <div class="knowledgebox animate__animated animate__lightSpeedInLeft"><img src="\static\images\K2.jpg" alt="fun fact" class="funfact animate__animated animate__tada animate__repeat-2 animate__delay-1s" onclick="funfact2()"></div>
+        <a href="{{ url_for('home') }}" id="back"><button type="submit" class="Button animate__animated animate__lightSpeedInLeft">BACK</button></a>
     </div>
     <nav class="navbar">
     <div class="headingbox animate__animated animate__lightSpeedInLeft">

@@ -13,7 +13,7 @@ body{
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 1px;
     font-size: 50px;
-    font-family: showcard Gothic;
+    font-family: 'Showcard Gothic', sans-serif;
     font-weight: bolder;
     box-shadow: 0 0 3px 3px white;
     background-color: rgba(0, 34, 255, 0.7);
