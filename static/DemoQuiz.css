@@ -139,3 +139,139 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 767px) {
+    body {
+        background-size: cover;
+        background-position: center;
+    }
+
+    .quizbox {
+        width: 95%;
+        height: auto;
+        background-size: cover;
+        padding: 10px;
+    }
+
+    .questionbox {
+        width: 90%;
+        height: auto;
+        font-size: 18px;
+    }
+
+    .subheadingbox {
+        width: 150px;
+        height: 40px;
+        font-size: 12px;
+        margin: 20px auto;
+    }
+
+    .question {
+        font-size: 22px;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .MCQSsection {
+        margin-left: 10px;
+        align-items: center;
+    }
+
+    .optionbox {
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .option-btn {
+        width: 90%;
+        font-size: 20px;
+        margin-left: 0;
+    }
+
+    .swal-icon {
+        width: 90%;
+        height: auto;
+    }
+
+    .swal-title,
+    .swal-text {
+        font-size: 18px;
+        margin: 10px;
+    }
+
+    .swal-button {
+        font-size: 18px;
+        height: 30px;
+        width: 90px;
+    }
+
+    .headingMarquee {
+        display: block;
+        white-space: normal;
+        overflow: visible;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .quizbox {
+        width: 90%;
+        height: auto;
+        background-size: cover;
+    }
+
+    .questionbox {
+        width: 95%;
+        height: auto;
+    }
+
+    .subheadingbox {
+        width: 160px;
+        height: 42px;
+        font-size: 13px;
+        margin: 25px auto;
+    }
+
+    .question {
+        font-size: 28px;
+        text-align: center;
+        margin: 25px;
+    }
+
+    .MCQSsection {
+        margin-left: 20px;
+        align-items: center;
+    }
+
+    .optionbox {
+        width: 85%;
+    }
+
+    .option-btn {
+        width: 90%;
+        font-size: 24px;
+        margin-left: 0;
+    }
+
+    .swal-icon {
+        width: 400px;
+        height: auto;
+    }
+
+    .swal-title,
+    .swal-text {
+        font-size: 22px;
+        margin: 15px;
+    }
+
+    .swal-button {
+        font-size: 18px;
+        height: 30px;
+        width: 90px;
+    }
+
+    .headingMarquee {
+        display: block;
+    }
+}

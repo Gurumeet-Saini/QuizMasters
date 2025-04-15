@@ -1,6 +1,7 @@
 body{
     background-image: url(images/CreateAndLoginPage.png);
     background-size: 100%;
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,10 +23,9 @@ body{
     align-items: center;
 }
 #character{
-    height: 490px;
-    width: 290px;
-    position: absolute;
-    bottom: 330px;
+    height: 250px;
+    width: 250px;
+    margin-top: 10px;
 }
 .Registerbox{
     height: 490px;
@@ -35,8 +35,6 @@ body{
     border-radius: 20px 20px 20px 20px;
     display: flex;
     justify-self: center;
-    position: absolute;
-    top: 310px;
 }
 .feedbackform{
     display: flex;
@@ -152,4 +150,107 @@ a{
     justify-content: center;
     align-items: center;
 }
-  
+
+@media (max-width: 767px) {
+    .heading {
+        font-size: 30px;
+        text-align: center;
+        display: none;
+    }
+
+    #character {
+        height: 150px;
+        width: 150px;
+        margin-top: 10px;
+    }
+
+    .Registerbox {
+        width: 90%;
+        height: auto;
+        padding: 20px 10px;
+        flex-direction: column;
+    }
+
+    .text1 {
+        font-size: 22px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .form {
+        width: 90%;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .submitbutton {
+        width: 80%;
+        font-size: 24px;
+        margin-top: 15px;
+    }
+
+    .swal-title, .swal-text {
+        font-size: 18px;
+    }
+
+    .swal-icon {
+        height: 150px;
+        width: 150px;
+    }
+
+    .swal-button {
+        width: 80px;
+        font-size: 16px;
+    }
+}
+
+
+/* ------------------- */
+/* 💻 Tablets & Small Laptops (768px - 1199px) */
+/* ------------------- */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .heading {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    #character {
+        height: 200px;
+        width: 200px;
+    }
+
+    .Registerbox {
+        width: 80%;
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .text1 {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .form {
+        width: 85%;
+        font-size: 18px;
+    }
+
+    .submitbutton {
+        width: 70%;
+        font-size: 28px;
+    }
+
+    .swal-title, .swal-text {
+        font-size: 22px;
+    }
+
+    .swal-icon {
+        height: 200px;
+        width: 200px;
+    }
+
+    .swal-button {
+        width: 90px;
+        font-size: 18px;
+    }
+}

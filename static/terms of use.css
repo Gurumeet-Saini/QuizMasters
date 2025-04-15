@@ -261,3 +261,181 @@ body {
     font-family: 'Franklin Gothic Medium';
     font-weight: bolder;
 }
+
+@media screen and (max-width: 767px) {
+    html, body {
+      background-size: cover;
+    }
+  
+    .navbar,
+    .textposition {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .headingbox,
+    .navigationbar,
+    .contentbox,
+    .subheadingbox {
+      width: 90%;
+      height: auto;
+      flex-direction: column;
+      margin: 10px auto;
+    }
+  
+    #mainheading {
+      font-size: 30px;
+      text-align: center;
+    }
+  
+    #logo {
+      height: 60px;
+      width: 60px;
+      margin: 10px;
+    }
+  
+    .navtext1,
+    .navtext4 {
+      font-size: 18px;
+      margin: 5px;
+      text-align: center;
+    }
+  
+    #accountimage {
+      height: 70px;
+      width: 70px;
+    }
+  
+    .MainKnowledgeBox,
+    .knowledgebox {
+      width: 150px;
+      height: auto;
+      margin: 10px;
+    }
+  
+    .knowledgetext {
+      font-size: 20px;
+    }
+  
+    .contentbox {
+      width: 95%;
+      height: auto;
+      margin: 20px auto;
+    }
+  
+    .text {
+      font-size: 16px;
+      margin: 10px;
+    }
+  
+    .footerbox {
+      padding: 50px 20px;
+      height: auto;
+    }
+  
+    .footertext1,
+    .footertext2 {
+      font-size: 18px;
+      margin: 10px 5px;
+    }
+  
+    .icons {
+      font-size: 35px;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    html, body {
+      background-size: cover;
+    }
+  
+    .navbar,
+    .textposition {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .headingbox {
+      width: 450px;
+      height: auto;
+      margin: 20px auto;
+    }
+  
+    .navigationbar {
+      width: 600px;
+      height: auto;
+      margin-left: 20px;
+      flex-wrap: wrap;
+    }
+  
+    #mainheading {
+      font-size: 38px;
+    }
+  
+    #logo {
+      height: 70px;
+      width: 70px;
+    }
+  
+    .navtext1 {
+      font-size: 22px;
+    }
+  
+    .navtext4 {
+      font-size: 16px;
+    }
+  
+    #accountimage {
+      height: 80px;
+      width: 80px;
+    }
+  
+    .MainKnowledgeBox {
+      width: 180px;
+      height: auto;
+      margin: 20px;
+    }
+  
+    .knowledgebox {
+      width: 150px;
+      height: auto;
+      margin: 10px;
+    }
+  
+    .knowledgetext {
+      font-size: 24px;
+    }
+  
+    .contentbox {
+      width: 90%;
+      height: auto;
+      margin: 30px auto;
+    }
+  
+    .subheadingbox {
+      width: 280px;
+      height: 60px;
+      font-size: 20px;
+    }
+  
+    .text {
+      font-size: 20px;
+      margin: 20px;
+    }
+  
+    .footerbox {
+      padding: 70px;
+      height: auto;
+    }
+  
+    .footertext1,
+    .footertext2 {
+      font-size: 22px;
+    }
+  
+    .icons {
+      font-size: 40px;
+    }
+  }
+  

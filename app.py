@@ -147,6 +147,10 @@ def StoryHome():
 def WriteStory():
     return render_template('WriteStory.html')
 
+@app.route('/VideoHome')
+def VideoHome():
+    return render_template('VideoHome.html')
+
 @app.route('/Englishquizselection')
 def Englishquizselection():
     return render_template('Englishquizselection.html')

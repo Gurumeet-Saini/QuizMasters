@@ -1,6 +1,7 @@
 body{
     background-image: url(images/CreateAndLoginPage.png);
     background-size: 100%;
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,10 +23,9 @@ body{
     align-items: center;
 }
 #character{
-    height: 490px;
-    width: 290px;
-    position: absolute;
-    bottom: 330px;
+    height: 250px;
+    width: 250px;
+    margin-top: 10px;
 }
 .Registerbox{
     height: 490px;
@@ -35,8 +35,7 @@ body{
     border-radius: 20px 20px 20px 20px;
     display: flex;
     justify-self: center;
-    position: absolute;
-    top: 310px;
+    margin-top: 0px;
 }
 .Registersection{
     display: flex;
@@ -189,4 +188,102 @@ a{
     justify-content: center;
     align-items: center;
 }
-  
+
+/* Media Query for Mobile Phones (less than 768px) */
+@media only screen and (max-width: 767px) {
+    .heading {
+        font-size: 30px;
+        text-align: center;
+        display: none;
+    }
+
+    .Registerbox {
+        width: 90%;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .text1 {
+        font-size: 24px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .text2, .form {
+        width: 90%;
+        font-size: 16px;
+    }
+
+    .submitbutton {
+        width: 70%;
+        font-size: 24px;
+    }
+
+    .backbutton {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    #character {
+        height: 180px;
+        width: 180px;
+    }
+
+    .swal-icon {
+        height: 200px;
+        width: 200px;
+    }
+
+    .swal-title, .swal-text {
+        font-size: 20px;
+    }
+}
+
+/* Media Query for Tablets and Small Laptops (768px - 1199px) */
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+    .heading {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .Registerbox {
+        width: 80%;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .text1 {
+        font-size: 28px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .text2, .form {
+        width: 90%;
+        font-size: 18px;
+    }
+
+    .submitbutton {
+        width: 60%;
+        font-size: 28px;
+    }
+
+    .backbutton {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    #character {
+        height: 220px;
+        width: 220px;
+    }
+
+    .swal-icon {
+        height: 250px;
+        width: 250px;
+    }
+
+    .swal-title, .swal-text {
+        font-size: 22px;
+    }
+}

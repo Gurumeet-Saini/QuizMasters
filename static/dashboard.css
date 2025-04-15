@@ -87,7 +87,7 @@ body {
 
 #mainheading {
     font-family: 'Showcard Gothic', sans-serif;
-    font-size: 50px;
+    font-size: 45px;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
     -webkit-text-stroke-width: 1.10px;
@@ -119,7 +119,7 @@ body {
 }
 
 .navtext4 {
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Franklin Gothic Medium';
     font-weight: bolder;
     color: white;
@@ -326,4 +326,129 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* ====== Default Styles: Already defined above ====== */
+/* Place your existing CSS code here, no need to move it */
+
+/* ====== Responsive Styles ====== */
+
+/* For large desktops and laptops (1200px and above) */
+@media only screen and (min-width: 1200px) {
+    html, body {
+        background-size: cover;
+    }
+}
+
+/* For tablets and small laptops (768px - 1199px) */
+@media only screen and (max-width: 1199px) and (min-width: 768px) {
+    .headingbox, .navigationbar {
+        width: 90%;
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .quizboxes {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .box {
+        width: 40%;
+        margin: 10px;
+    }
+
+    .knowledgetext{
+        font-size: 30px;
+    }
+
+    .MainKnowledgeBox,
+    .knowledgebox {
+        width: 75%;
+    }
+
+    .subheadingbox {
+        width: 60%;
+        display: flex;
+        justify-self: center;
+    }
+}
+
+/* For mobile phones (less than 768px) */
+@media only screen and (max-width: 767px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .headingbox,
+    .navigationbar,
+    .subheadingbox {
+        width: 90%;
+        height: auto;
+        flex-direction: column;
+        margin: 10px 0;
+    }
+
+    #mainheading {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    #logo {
+        height: 60px;
+        width: 60px;
+    }
+
+    .quizboxes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        width: 80%;
+        margin: 10px 0;
+    }
+
+    .quizimages {
+        width: 120px;
+        height: 130px;
+    }
+
+    .QuizHeading {
+        font-size: 15px;
+    }
+
+    .subheading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .play {
+        font-size: 16px;
+        width: 100px;
+    }
+
+    .footerbox {
+        padding: 30px;
+        height: auto;
+    }
+
+    .footertext1,
+    .footertext2 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .icons {
+        font-size: 36px;
+    }
+
+    .MainKnowledgeBox,
+    .knowledgebox {
+        width: 80%;
+    }
 }
